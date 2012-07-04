@@ -1,0 +1,58 @@
+﻿@model Dictionary<MSW.Models.dbo.TeachingMonth, MSW.Models.dbo.TeachingVisit> 
+<table>
+    <tr>
+        <td style="width: 130px">
+            <span style="padding-bottom: 3px"><strong>Visit Month</strong></span>
+            <br />
+            <select name="visitSelection">
+                @foreach (var month in Model.Keys)
+                {
+                    <option value="@Model[month].TeachingVisitID">
+                        @MSW.Models.dbo.TeachingMonth.monthNames[month.teachingMonth.Month - 1] @month.teachingMonth.Year
+                    </option>
+                }
+                @Html.Hidden("visitSelected", Model.Values.First().TeachingVisitID)
+            </select>
+        </td>
+        <td>
+            <table>
+                <tr>
+                    <th>
+                        Member Visited
+                    </th>
+                    <th>
+                        Member Needs Attention
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+                @{
+                    var row = 0;
+                }
+                @foreach (var visit in Model.Values)
+                {
+                    row++;
+                    <tr id="@(visit.TeachingVisitID)visit" monthid="@visit.TeachingMonthID" 
+                    @if (row > 1)
+                    {
+                            @:style='display:none'
+                        }>
+                        <td class="TeachingOption">
+                            <center>@Html.CheckBoxFor(x => visit.wasVisited, new { @wasVisited = visit.TeachingVisitID })</center>
+                        </td>
+                        <td class="TeachingOption">
+                            <center>@Html.CheckBoxFor(x => visit.needsAttention, new { @needsAttention = visit.TeachingVisitID })</center>
+                        </td>
+                        <td class="TeachingStatusButton">
+                            <button id="continue" visitid="@visit.TeachingVisitID" name="button" class="ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all">
+                                <span class="ui-button-text">Record Visit</span></button>
+                                </td>
+                                <td style="background-color: transparent !important; border:none !important">
+                            <img visitreportedid="@visit.TeachingVisitID" style="@(visit.reported ? "" : "display:none")" src="../../Content/images/green_check.gif" width="21" height="21" alt="" />
+                        </td>
+                    </tr>                    
+                }
+            </table>
+        </td>
+    </tr>
+</table>

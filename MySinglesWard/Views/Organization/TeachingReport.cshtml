@@ -1,0 +1,147 @@
+﻿@model MSW.Models.Reports.TeachingReport
+@{
+    Layout = null;
+}
+<link href="../../Content/admin/css/teachingReport.css" rel="stylesheet" type="text/css" />
+<span style="float: right">Select a month:
+    <select id="monthSelection">
+        @foreach (var month in Model.months)
+        {
+            <option value="@month.TeachingMonthID">
+                @MSW.Models.dbo.TeachingMonth.monthNames[month.teachingMonth.Month - 1] @month.teachingMonth.Year
+            </option>
+        }
+    </select>
+</span>
+@{
+    int monthNumber = 0;
+}
+@foreach (var month in Model.months)
+{
+    <div id="@month.TeachingMonthID" @(monthNumber > 0 ? "style=display:none" : "") name="reportMonth">
+        <h3>@MSW.Models.dbo.TeachingMonth.monthNames[month.teachingMonth.Month - 1] @month.teachingMonth.Year
+            <a href="/Organization/TeachingCSV?MonthID=@month.TeachingMonthID">
+                <img src="../../Content/images/excelLogo.png" title="Download Spreadsheet" style="width: 20px" />
+            </a>
+        </h3>
+        <p style="padding-bottom: 3px">
+            <strong>Teaching Percentage: </strong>@((int)Model.teachingPercentages[month.TeachingMonthID])%</p>
+        @foreach (var district in Model.districts)
+        {
+            if (district.companionships.Count != 0)
+            {
+            <strong>District: </strong>@district.district.Title
+            
+                foreach (var companionship in district.companionships)
+                {
+                    int comps = companionship.teachers.Count;
+                    int teachees = companionship.teachees.Count;
+                    if (comps != 0 && teachees != 0)
+                    {
+            <table class="reportTable">
+                <tr>
+                    <td class="companionship">
+                        <strong>Companionship</strong>
+                    </td>
+                    <td class="teachee">
+                        <strong>Member being Taught</strong>
+                    </td>
+                    <th class="status">
+                        Was Visited
+                    </th>
+                    <th class="status">
+                        Needs Attention
+                    </th>
+                </tr>
+                @for (int i = 0; i < (teachees < comps ? comps : teachees); i++)
+                {
+                    <tr>
+                        <!-- Companion -->
+                        <td class="companionship">
+                            @try
+                            {
+                                @(companionship.teachers[i].user.LastName + ", " + companionship.teachers[i].memberSurvey.prefName)
+                            }
+                            catch
+                            {
+                                //There was a different number in this row   
+                            }
+                        </td>
+                        <!-- Teachee -->
+                        @try
+                        {
+                            MSW.Model.MemberModel teachee = companionship.teachees[i];
+                            bool wasReported = Model.teachingVisits[companionship][teachee.user.MemberID][month.TeachingMonthID].reported;
+                            bool wasVisited = Model.teachingVisits[companionship][teachee.user.MemberID][month.TeachingMonthID].wasVisited;
+                            bool needsAttention = Model.teachingVisits[companionship][teachee.user.MemberID][month.TeachingMonthID].needsAttention;
+                            
+                            <td class="teachee">
+                                @(teachee.user.LastName + ", " + teachee.memberSurvey.prefName)
+                            </td>
+                            <td class="status">
+                                <center class="@(wasReported ? wasVisited ? "yesStatus" : "noStatus" : "")">
+                                    @if (wasReported)
+                                    {
+                                        @(wasVisited ? "Y" : "N")
+                                    }
+                                    else
+                                    {
+                                        <span>-</span>
+                                    }
+                                </center>
+                            </td>
+                            <td class="status">
+                                <center class="@(wasReported ? needsAttention ? "warningStatus" : "" : "")">
+                                    @if (wasReported)
+                                    {
+                                        @(needsAttention ? "Y" : "-")
+                                    }
+                                    else
+                                    {
+                                        <span>-</span>
+                                    }
+                                </center>
+                            </td>
+                        }
+                        catch
+                        {
+                            //There was a difference in the row and extra columns need to be put in
+                            
+                            <td class="teachee">
+                            </td>
+                            <td class="status">
+                            </td>
+                            <td class="status">
+                            </td>
+                        }
+                    </tr>
+                }
+            </table>
+                    }
+
+
+                }
+            }
+        }
+    </div>
+    
+        monthNumber++;
+
+}
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        //Handle the changing of report month selection
+        $('#monthSelection').change(function () {
+            $('[name=reportMonth]').hide();
+
+            var monthID = $(this).val();
+            $('#' + monthID).fadeIn();
+
+        });
+
+    });
+
+</script>

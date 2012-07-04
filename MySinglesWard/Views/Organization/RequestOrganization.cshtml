@@ -1,0 +1,120 @@
+﻿@model IEnumerable<MSW.Models.MSWOrganizationModel>
+@{
+    Page.Title = "Select an Organization";
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+    Page.Header = "Select an Organization";
+}
+<table>
+    <tr valign="top">
+        <td>
+            <table border="0" width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td>
+                        <div style='padding-left: 25px'>
+                            <table class="WardList">
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        <strong>Name</strong>
+                                    </td>
+                                    <td>
+                                        <strong>President</strong>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                                @foreach (var item in Model)
+                                {
+                                    using (Html.BeginForm())
+                                    {
+                                    <tr>
+                                        @Html.Hidden("orgID", item.org.OrgID)
+                                        <td>
+                                            @if (item.org.ReportID == "Elders Quorum")
+                                            {
+                                                <img class="orgLogo" src="/Content/images/EQlogo.png" alt="@item.org.Title" />
+                                            }
+                                            else
+                                            {
+                                                <img class="orgLogo" src="/Content/images/RSlogo.png" alt="@item.org.Title" />
+                                            }
+                                        </td>
+                                        <td>
+                                            @item.org.Title
+                                        </td>
+                                        <td>
+                                            @if (item.president != null)
+                                            {
+                                                @(item.president.user.LastName + ", " + item.president.memberSurvey.prefName)
+                                            }
+                                        </td>
+                                        <td>
+                                            <input class="ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all"
+                                                id="submit" type="submit" value="Request Membership" />
+                                        </td>
+                                    </tr>
+                                    }
+                                }
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <!-- end Residence-form  -->
+        </td>
+        <td>
+            <!--  start related-activities -->
+            <div id="related-activities">
+                <!--  start related-act-top -->
+                <div id="related-act-top">
+                    <img src="../../Content/admin/images/forms/header_related_act.gif" width="271" height="43"
+                        alt="" />
+                </div>
+                <!-- end related-act-top -->
+                <!--  start related-act-bottom -->
+                <div id="related-act-bottom">
+                    <!--  start related-act-inner -->
+                    <div id="related-act-inner">
+                        <div class="left">
+                            <img src="../../Content/admin/images/forms/icon_edit.gif" width="21" height="21"
+                                alt="" /></div>
+                        <div class="right">
+                            You are currently not in an organization. Please select the organization you belong
+                            to.
+                        </div>
+                        <div class="clear">
+                        </div>
+                    </div>
+                    <!-- end related-act-inner -->
+                    <div class="clear">
+                    </div>
+                </div>
+                <!-- end related-act-bottom -->
+            </div>
+            <!-- end related-activities -->
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <img src="../../Content/admin/images/shared/blank.gif" width="695" height="1" alt="blank" />
+        </td>
+        <td>
+        </td>
+    </tr>
+</table>
+<div class="clear">
+</div>

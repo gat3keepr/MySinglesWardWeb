@@ -1,0 +1,108 @@
+﻿@model MSW.Models.Reports.MemberTeachingReport
+@{
+    Layout = null;
+}
+<link href="../../Content/admin/css/teachingReport.css" rel="stylesheet" type="text/css" />
+@if (Model.members.Count > 0)
+{
+    
+    <span class="toggle" id="missedSort"><span class="toggleText missedMonth">Sort By Missed Months</span><img
+        src="../../Content/images/refresh.png" style="width: 24px"></span> <span class="toggle"
+            style="display: none" id="nameSort"><span class="toggleText">Sort By Name</span><img
+                src="../../Content/images/refresh.png" style="width: 24px"></span>
+    
+    <table id="MemberTable" class="reportTable byMember">
+        <thead>
+            <tr>
+                <th style="text-align:left">
+                    <strong>Name</strong>
+                </th>
+                <th class="status">
+                    Months Not Taught*
+                </th>
+                @for (int i = Model.months.Count - 1; i >= 0; i--)
+                {                    
+                    <th class="status">
+                        <strong>
+                            @MSW.Models.dbo.TeachingMonth.monthNames[Model.months[i].teachingMonth.Month - 1]
+                            @Model.months[i].teachingMonth.Year
+                        </strong>
+                    </th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var member in Model.members)
+            {
+                <tr>
+                    <td>@(member.user.LastName + ", " + member.memberSurvey.prefName)
+                    </td>
+                    <td class="status"><center>@Model.consecutiveMissedVisits[member.user.MemberID]</center>
+                    </td>
+                    @for (int i = Model.months.Count - 1; i >= 0; i--)
+                    {
+                        var visit = Model.memberVisits[member.user.MemberID][Model.months[i].TeachingMonthID].Key;
+                        var belongsToOrg = Model.memberVisits[member.user.MemberID][Model.months[i].TeachingMonthID].Value;
+                        if (visit == null)
+                        {
+                        <td class="status">
+                            <center class="noStatus">
+                                N
+                            </center>
+                        </td>
+                        }
+                        else
+                        {
+                        <td class="status">
+                            <center class="@(!belongsToOrg ? "otherStatus" : visit.reported ? visit.wasVisited ? "yesStatus" : "noStatus" : "")">
+                                @if (!belongsToOrg)
+                                {
+                                    <span>Other</span>
+                                }
+                                else if (visit.reported)
+                                {
+                                    @(visit.wasVisited ? "Y" : "N")
+                                }
+                                else
+                                {
+                                    <span>-</span>
+                                }
+                            </center>
+                        </td>
+                        }
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+    
+    <span class="toggle" style="margin:-9px">* Consecutive Months</span>
+    
+    <script src="../../Scripts/jquery.tablesorter.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#MemberTable").tablesorter();
+
+            $('#missedSort').click(function () {
+                $(this).hide();
+                $('#nameSort').show();
+
+                var sorting = [[1, 1], [0,0]];
+                $("#MemberTable").trigger("sorton", [sorting]);
+            });
+
+            $('#nameSort').click(function () {
+                $(this).hide();
+                $('#missedSort').show();
+
+                var sorting = [[0, 0]];
+                $("#MemberTable").trigger("sorton", [sorting]);
+            });
+        });
+    </script>
+}
+else
+{
+    <p>
+        There are no members in your organization to report on.</p>
+}

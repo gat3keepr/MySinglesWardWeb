@@ -1,0 +1,124 @@
+﻿@model Dictionary<MSW.Models.dbo.District, List<MSW.Models.ReportTeachingModel>>
+@{
+    string title = ViewBag.org.ReportID == "Elders Quorum" ? "Report Home Teaching" : "Report Visiting Teaching";
+    Page.Title = title;
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+    Page.Header = title;
+}
+@section HeadContent
+{
+    <script src="../../Scripts/js/jquery-ui-1.8.13.custom.min.js" type="text/javascript"></script>
+}
+@section MenuScript{
+    <script type="text/javascript">
+        MenuSelect("Calling", "teachingReport");
+    </script>
+}
+<table style="margin-left: 20px">
+    <tr valign="top">
+        <td>
+            @foreach (var district in Model.Keys)
+            {
+                <h2>
+                    District: @district.Title</h2>
+                <div>
+                    @foreach (var companionship in Model[district])
+                    {
+                        if (companionship.companions.Count()
+                            == 0 && companionship.teachees.Count() == 0) { continue; }
+                        <div class="reportCompanionship">
+                            <!-- Companions -->
+                            <p style="padding-bottom: 10px">
+                                <strong>Companionship:&nbsp;&nbsp;</strong>
+                                @foreach (var member in companionship.companions)
+                                {
+                                    @Html.ActionLink(member.user.LastName + ", " + member.memberSurvey.prefName, "GetMember", "Home", new { memberID = member.user.MemberID }, new { @target = "_blank" })
+                                    <span>&nbsp;&nbsp;&nbsp;</span>
+                                }
+                            </p>
+                            <!-- Teachees -->
+                            <p>
+                                <strong>Members to Teach</strong></p>
+                            @if (companionship.teachees.Count() == 0) {
+                            <br />
+                            <p>
+                                There is no one assigned to this companionship.</p>
+                            <br />
+                            <br />
+                            } else {
+                            <table style="width: 890px; margin-bottom: 30px">
+                                <tr>
+                                    <td class="infoColumn">
+                                    </td>
+                                    <td class="infoColumn">
+                                        <strong>Name</strong>
+                                    </td>
+                                    <td>
+                                        <strong>Teaching Status</strong>
+                                    </td>
+                                </tr>
+                                @foreach (var teachee in companionship.teachees)
+                                {
+                                    var item = teachee.Key;
+                                    <tr id="@(item.user.MemberID)X" name="@((item.memberSurvey.prefName.ToLower() + "_" + item.user.LastName.ToLower()).Replace(" ", "_"))"
+                                        type="member">
+                                        <td class="infoColumn">
+                                            <img class="smallPic" src="/Photo/@item.photo.FileName" alt="Profile Picture" />
+                                        </td>
+                                        <td class="nameColumn">
+                                            @Html.ActionLink(item.memberSurvey.prefName + " " + item.user.LastName, "GetMember", "Home", new { memberID = item.user.MemberID }, new { @target = "_blank" })
+                                        </td>
+                                        <td class="TeachingStatus">
+                                            @{Html.RenderPartial("TeachingStatus", teachee.Value, ViewData);}
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                            }
+                        </div>
+                    }
+                </div>
+            }
+        </td>
+        <td>
+            <!--  start Information & Features -->
+            <div id="related-activities">
+                <!--  start related-act-top -->
+                <div id="related-act-top">
+                    <img src="../../Content/admin/images/forms/header_related_act.gif" width="271" height="43"
+                        alt="" />
+                </div>
+                <!-- end related-act-top -->
+                <!--  start related-act-bottom -->
+                <div id="related-act-bottom">
+                    <!--  start related-act-inner -->
+                    <div id="related-act-inner">
+                        <div class="left">
+                            <img src="../../Content/admin/images/forms/icon_edit.gif" width="21" height="21"
+                                alt="" /></div>
+                        <div class="right">
+                            This page allows leadership to report the teaching status for all the assigned districts.
+                        </div>
+                        <div class="clear">
+                        </div>
+                    </div>
+                    <!-- end related-act-inner -->
+                    <div class="clear">
+                    </div>
+                </div>
+                <!-- end related-act-bottom -->
+            </div>
+            <!-- end Information & Features -->
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <img src="../../Content/admin/images/shared/blank.gif" width="695" height="1" alt="blank" />
+        </td>
+        <td>
+        </td>
+    </tr>
+</table>
+<div style="clear: both;">
+</div>
+<script src="../../Scripts/ReportTeaching.js" type="text/javascript"></script>

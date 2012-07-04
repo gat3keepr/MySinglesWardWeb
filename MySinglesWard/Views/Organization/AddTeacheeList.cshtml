@@ -1,0 +1,83 @@
+﻿@model IEnumerable<MSW.Model.MemberModel>
+@{
+    Layout = null;
+}
+<link href="../../Content/admin/css/screen.css" rel="stylesheet" type="text/css" />
+<link href="../../Content/css/custom-theme/jquery-ui-1.8.13.custom.css" rel="stylesheet"
+    type="text/css" />
+@if (Model.Count() == 0)
+{
+    @:Every member has a been assigned.
+}
+else
+{
+    @Html.Hidden("CompanionshipID", (int)ViewBag.CompanionshipID)
+    <table class="WardList" style="width: 650px !important">
+        <tr>
+            <td>
+            </td>
+            <td>
+                <strong>Name</strong>
+            </td>
+            <td>
+                <strong>Apartment</strong>
+            </td>
+            <td>
+            </td>
+        </tr>
+        @foreach (var item in Model)
+        { 
+            <tr id="@(item.user.MemberID)X" name="@((item.memberSurvey.prefName.ToLower() + "_" + item.user.LastName.ToLower()).Replace(" ", "_"))"
+                                        type="member">
+                <td>
+                    <img class="smallPic" src="/Photo/@item.photo.FileName" alt="Profile Picture" />
+                </td>
+                <td>
+                    @Html.ActionLink(item.memberSurvey.prefName + " " + item.user.LastName, "GetMember", "Home", new { memberID = item.user.MemberID }, null)
+                </td>
+                <td>
+                    @item.memberSurvey.residence
+                </td>
+                <td style="padding-left: 10px;">
+                    <button id="add" memberid="@item.user.MemberID" name="addTeachee" class="ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all">
+                        <span class="ui-button-text">Add</span></button>
+                </td>
+            </tr>
+        }
+    </table>
+
+    <script type="text/javascript">
+        //Add Teacher to companionship
+        $('[name=addTeachee]').click(function () {
+            var memberID = $(this).attr('memberid');
+            var CompanionshipID = $('#CompanionshipID').val();
+
+            $.ajax({
+                url: '/Organization/AddTeachee',
+                traditional: true,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: { memberID: memberID, CompanionshipID: CompanionshipID },
+                async: false,
+                success: function (data) {
+                    var name = data.name;
+                    var completionRate = data.completionRate;
+
+                    //Create Table Row for new member
+                    var newTeachee = $('[teacheeid=newTeachee]').clone();
+                    $(newTeachee).attr('teacheeid', memberID);
+                    $(newTeachee).find('[name=teacheeName]').html("<a target='_blank' href='/Home/GetMember?memberID=" + memberID + "'>" + name + "</a>");
+                    $(newTeachee).find('[name=removeTeachee]').attr('onclick', 'RemoveTeachee(' + memberID + ',' + CompanionshipID + ')');
+
+                    $('[companionshipid=' + CompanionshipID + 'teachees]').append(newTeachee);
+                    $('#AddTeacheeDialog').dialog('close');
+                    $('[name=loading]').show();
+                    $('#teacheeList').hide();
+                },
+                error: function (error) {
+                    alert("Please try again later.");
+                }
+            });
+        });
+    </script>
+}

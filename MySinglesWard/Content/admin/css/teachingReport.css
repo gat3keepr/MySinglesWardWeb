@@ -1,0 +1,74 @@
+﻿.reportTable
+{
+    margin: 7px;
+}
+
+.reportTable td
+{
+    padding: 1px;
+}
+.reportTable .companionship
+{
+    min-width: 175px;
+}
+
+.reportTable .teachee
+{
+    min-width: 175px;
+}
+
+.reportTable .status
+{
+    min-width: 120px;
+}
+
+.yesStatus
+{
+    background-color: #00FF94;   
+}
+
+.noStatus
+{
+    background-color: #FF3200;   
+}
+
+.otherStatus
+{
+    background-color: White;   
+}
+
+.warningStatus
+{
+	background-color: #F7FE2E; 
+}
+
+.hidden
+{
+    display: none;   
+}
+
+.toggle
+{
+	cursor: pointer;
+	float: right;
+}
+
+.toggleText
+{
+	margin: 3px 0px 0px -90px;
+	position: absolute;
+	font-weight:bold;
+	-moz-user-select:none;
+	user-select:none;
+}
+
+.missedMonth
+{
+    margin: 3px 0 0 -147px !important;
+}
+
+.byMember td
+{
+    padding-right: 5px;
+    padding-left: 5px;
+}

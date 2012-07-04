@@ -1,0 +1,80 @@
+﻿@model IEnumerable<MSW.Model.MemberModel>
+@{
+	ViewBag.Title = "SpeakingAssignments";
+}
+<link href="../../Content/admin/css/callingReport.css" rel="stylesheet" type="text/css" />
+<span class="toggle" id="dateSort"><span class="toggleText">Sort By Date </span><img src="../../Content/images/refresh.png" style="width: 24px"></span>
+	<span class="toggle" style="display: none" id="nameSort"><span class="toggleText">Sort By Name </span><img src="../../Content/images/refresh.png" style="width: 24px"></span>
+<table class="reportTable tablesorter" id="assignments">
+	<thead><tr>
+	
+		<th>
+		</th>
+		<th>
+			<strong>Name</strong>
+		</th>
+		<th>
+			<strong>Last Spoke</strong>
+		</th>		
+	</tr></thead>
+	<tbody>
+	
+	@foreach (var item in Model)
+	{
+		<tr>
+			<td>
+				<input class="ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all"
+                        name="spoke" memberid="@item.user.MemberID" value="Gave Talk" />
+				<center><img src="../../Content/images/loading.gif" style="display: none; width: 30px" id="@(item.user.MemberID)LOAD" /></center>
+			</td>
+			<td>
+				@item.user.LastName, @item.memberSurvey.prefName
+			</td>
+			<td id="@item.user.MemberID">
+				@if (item.lastSpoke != null)
+				{
+					@item.lastSpoke.LastSpoke.ToShortDateString()
+				}
+			</td>
+		</tr>
+	 }
+	 </tbody>
+</table>
+<script src="../../Scripts/jquery.tablesorter.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+	$('[name=spoke]').click(function () {
+		var memberID = $(this).attr('memberid');
+		$('[memberid=' + memberID + ']').hide();
+		$('#' + memberID + 'LOAD').show();
+
+		$.post('/Calling/GaveTalk', { memberID: memberID }, function (date) {
+			$('#' + memberID).html(date);
+			$('[memberid=' + memberID + ']').show();
+			$('#' + memberID + 'LOAD').hide();
+			$("#assignments").tablesorter();
+		});
+
+		return false;
+	});
+
+	$(document).ready(function () {
+		$("#assignments").tablesorter();
+
+		$('#dateSort').click(function () {
+			$(this).hide();
+			$('#nameSort').show();
+
+			var sorting = [[2, 0], [1, 0]];
+			$("#assignments").trigger("sorton", [sorting]);
+		});
+
+		$('#nameSort').click(function () {
+			$(this).hide();
+			$('#dateSort').show();
+
+			var sorting = [[1, 0]];
+			$("#assignments").trigger("sorton", [sorting]);
+		});
+	});
+</script>

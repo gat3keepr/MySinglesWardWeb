@@ -1,0 +1,353 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D4F4C274-4288-423E-81B8-7EDDFD34033B}</ProjectGuid>
+    <ProjectTypeGuids>{F85E285D-A4E0-4152-9332-AB1D724D3325};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MySinglesWardMaintenance</RootNamespace>
+    <AssemblyName>MySinglesWardMaintenance</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\admin\css\callingReport.css" />
+    <Content Include="Content\admin\css\datePicker.css" />
+    <Content Include="Content\admin\css\pro_dropline.css" />
+    <Content Include="Content\admin\css\pro_dropline_ie.css" />
+    <Content Include="Content\admin\css\screen.css" />
+    <Content Include="Content\admin\images\forms\bg_org.png" />
+    <Content Include="Content\admin\images\forms\bg_org_blue.png" />
+    <Content Include="Content\admin\images\forms\bg_related_act.gif" />
+    <Content Include="Content\admin\images\forms\bubble_inner.gif" />
+    <Content Include="Content\admin\images\forms\bubble_left.gif" />
+    <Content Include="Content\admin\images\forms\bubble_right.gif" />
+    <Content Include="Content\admin\images\forms\choose-file.gif" />
+    <Content Include="Content\admin\images\forms\error_left.gif" />
+    <Content Include="Content\admin\images\forms\error_right.gif" />
+    <Content Include="Content\admin\images\forms\form_inp.gif" />
+    <Content Include="Content\admin\images\forms\form_inp_error.gif" />
+    <Content Include="Content\admin\images\forms\form_reset.gif" />
+    <Content Include="Content\admin\images\forms\form_select.gif" />
+    <Content Include="Content\admin\images\forms\form_select_small.gif" />
+    <Content Include="Content\admin\images\forms\form_submit.gif" />
+    <Content Include="Content\admin\images\forms\form_textarea.gif" />
+    <Content Include="Content\admin\images\forms\header_org_minus.png" />
+    <Content Include="Content\admin\images\forms\header_org_plus.png" />
+    <Content Include="Content\admin\images\forms\header_related_act.gif" />
+    <Content Include="Content\admin\images\forms\icon_calendar.jpg" />
+    <Content Include="Content\admin\images\forms\icon_edit.gif" />
+    <Content Include="Content\admin\images\forms\icon_list_arrow.gif" />
+    <Content Include="Content\admin\images\forms\icon_minus.gif" />
+    <Content Include="Content\admin\images\forms\icon_minus_red.gif" />
+    <Content Include="Content\admin\images\forms\icon_plus.gif" />
+    <Content Include="Content\admin\images\forms\icon_plus.png" />
+    <Content Include="Content\admin\images\forms\lines_dotted_short.gif" />
+    <Content Include="Content\admin\images\forms\step_1.gif" />
+    <Content Include="Content\admin\images\forms\step_dark_left.gif" />
+    <Content Include="Content\admin\images\forms\step_dark_right.gif" />
+    <Content Include="Content\admin\images\forms\step_dark_round.gif" />
+    <Content Include="Content\admin\images\forms\step_light_left.gif" />
+    <Content Include="Content\admin\images\forms\step_light_right.gif" />
+    <Content Include="Content\admin\images\forms\step_light_round.gif" />
+    <Content Include="Content\admin\images\forms\upload_file.gif" />
+    <Content Include="Content\admin\images\login\icon_back_login.gif" />
+    <Content Include="Content\admin\images\login\inp_login.gif" />
+    <Content Include="Content\admin\images\login\loginbox_bg.png" />
+    <Content Include="Content\admin\images\login\login_bg.jpg" />
+    <Content Include="Content\admin\images\login\submit_login.gif" />
+    <Content Include="Content\admin\images\shared\blank.gif" />
+    <Content Include="Content\admin\images\shared\border_bit.jpg" />
+    <Content Include="Content\admin\images\shared\cal_th_repeat.jpg" />
+    <Content Include="Content\admin\images\shared\cal_top_bg.jpg" />
+    <Content Include="Content\admin\images\shared\cal_top_repeat.jpg" />
+    <Content Include="Content\admin\images\shared\checkbox.gif" />
+    <Content Include="Content\admin\images\shared\content_repeat.jpg" />
+    <Content Include="Content\admin\images\shared\corner_bottom_left.jpg" />
+    <Content Include="Content\admin\images\shared\corner_bottom_right.jpg" />
+    <Content Include="Content\admin\images\shared\corner_top_left.jpg" />
+    <Content Include="Content\admin\images\shared\corner_top_right.jpg" />
+    <Content Include="Content\admin\images\shared\icon_idlogo.jpg" />
+    <Content Include="Content\admin\images\shared\logo.png" />
+    <Content Include="Content\admin\images\shared\nav\account_drop_bg.gif" />
+    <Content Include="Content\admin\images\shared\nav\account_line.gif" />
+    <Content Include="Content\admin\images\shared\nav\back_0.gif" />
+    <Content Include="Content\admin\images\shared\nav\back_1x.gif" />
+    <Content Include="Content\admin\images\shared\nav\Copy of pro_line_1.gif" />
+    <Content Include="Content\admin\images\shared\nav\divider.jpg" />
+    <Content Include="Content\admin\images\shared\nav\icon_acc_inbox.gif" />
+    <Content Include="Content\admin\images\shared\nav\icon_acc_personal.gif" />
+    <Content Include="Content\admin\images\shared\nav\icon_acc_projects.gif" />
+    <Content Include="Content\admin\images\shared\nav\icon_acc_settings.gif" />
+    <Content Include="Content\admin\images\shared\nav\icon_acc_stats.gif" />
+    <Content Include="Content\admin\images\shared\nav\nav_login.png" />
+    <Content Include="Content\admin\images\shared\nav\nav_logout.gif" />
+    <Content Include="Content\admin\images\shared\nav\nav_logout.png" />
+    <Content Include="Content\admin\images\shared\nav\nav_myaccount.gif" />
+    <Content Include="Content\admin\images\shared\nav\nav_myaccount.png" />
+    <Content Include="Content\admin\images\shared\nav\nav_register.png" />
+    <Content Include="Content\admin\images\shared\nav\pro_line_1.gif" />
+    <Content Include="Content\admin\images\shared\nav\pro_line_2.gif" />
+    <Content Include="Content\admin\images\shared\nav\repeat.jpg" />
+    <Content Include="Content\admin\images\shared\side_shadowleft.jpg" />
+    <Content Include="Content\admin\images\shared\side_shadowright.jpg" />
+    <Content Include="Content\admin\images\shared\top_bg.jpg" />
+    <Content Include="Content\admin\images\shared\top_search_btn.gif" />
+    <Content Include="Content\admin\images\shared\top_search_inp.gif" />
+    <Content Include="Content\admin\images\shared\top_search_select.gif" />
+    <Content Include="Content\admin\images\shared\year_next.gif" />
+    <Content Include="Content\admin\images\shared\year_prev.gif" />
+    <Content Include="Content\admin\images\table\actions_slider_bg.gif" />
+    <Content Include="Content\admin\images\table\action_delete.gif" />
+    <Content Include="Content\admin\images\table\action_edit.gif" />
+    <Content Include="Content\admin\images\table\content_round_repeat.jpg" />
+    <Content Include="Content\admin\images\table\content_round_top.jpg" />
+    <Content Include="Content\admin\images\table\dropdown_actions.gif" />
+    <Content Include="Content\admin\images\table\icon_close_blue.gif" />
+    <Content Include="Content\admin\images\table\icon_close_green.gif" />
+    <Content Include="Content\admin\images\table\icon_close_red.gif" />
+    <Content Include="Content\admin\images\table\icon_close_yellow.gif" />
+    <Content Include="Content\admin\images\table\message_blue.gif" />
+    <Content Include="Content\admin\images\table\message_green.gif" />
+    <Content Include="Content\admin\images\table\message_red.gif" />
+    <Content Include="Content\admin\images\table\message_yellow.gif" />
+    <Content Include="Content\admin\images\table\paging_far_left.gif" />
+    <Content Include="Content\admin\images\table\paging_far_right.gif" />
+    <Content Include="Content\admin\images\table\paging_left.gif" />
+    <Content Include="Content\admin\images\table\paging_right.gif" />
+    <Content Include="Content\admin\images\table\select_number_rows.gif" />
+    <Content Include="Content\admin\images\table\table_header.jpg" />
+    <Content Include="Content\admin\images\table\table_header_checkbox.jpg" />
+    <Content Include="Content\admin\images\table\table_header_options.jpg" />
+    <Content Include="Content\admin\images\table\table_header_repeat.jpg" />
+    <Content Include="Content\admin\images\table\table_icon_1.gif" />
+    <Content Include="Content\admin\images\table\table_icon_2.gif" />
+    <Content Include="Content\admin\images\table\table_icon_3.gif" />
+    <Content Include="Content\admin\images\table\table_icon_4.gif" />
+    <Content Include="Content\admin\images\table\table_icon_5.gif" />
+    <Content Include="Content\admin\images\table\table_icon_6.gif" />
+    <Content Include="Content\admin\images\table\table_icon_7.gif" />
+    <Content Include="Content\admin\images\table\table_icon_8.gif" />
+    <Content Include="Content\admin\images\table\table_icon_9.png" />
+    <Content Include="Content\admin\images\table\table_sort_arrow.gif" />
+    <Content Include="Content\css\bishopricListStyle.css" />
+    <Content Include="Content\css\custom-theme\images\ui-bg_flat_100_fcfdfd_40x100.png" />
+    <Content Include="Content\css\custom-theme\images\ui-bg_flat_55_999999_40x100.png" />
+    <Content Include="Content\css\custom-theme\images\ui-bg_flat_75_aaaaaa_40x100.png" />
+    <Content Include="Content\css\custom-theme\images\ui-bg_glass_55_f8da4e_1x400.png" />
+    <Content Include="Content\css\custom-theme\images\ui-bg_glass_75_79c9ec_1x400.png" />
+    <Content Include="Content\css\custom-theme\images\ui-bg_glass_80_a0adca_1x400green.png" />
+    <Content Include="Content\css\custom-theme\images\ui-bg_glass_80_a0adca_1x400red.png" />
+    <Content Include="Content\css\custom-theme\images\ui-bg_gloss-wave_45_e14f1c_500x100.png" />
+    <Content Include="Content\css\custom-theme\images\ui-bg_gloss-wave_50_5f8281_500x100.png" />
+    <Content Include="Content\css\custom-theme\images\ui-bg_highlight-soft_100_1c2d58_1x100.png" />
+    <Content Include="Content\css\custom-theme\images\ui-bg_highlight-soft_45_415882_1x100.png" />
+    <Content Include="Content\css\custom-theme\images\ui-icons_0078ae_256x240.png" />
+    <Content Include="Content\css\custom-theme\images\ui-icons_056b93_256x240.png" />
+    <Content Include="Content\css\custom-theme\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Content\css\custom-theme\images\ui-icons_e0fdff_256x240.png" />
+    <Content Include="Content\css\custom-theme\images\ui-icons_f7a50d_256x240.png" />
+    <Content Include="Content\css\custom-theme\images\ui-icons_fcd113_256x240.png" />
+    <Content Include="Content\css\custom-theme\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\css\custom-theme\jquery-ui-1.8.13.custom.css" />
+    <Content Include="Content\css\LogOnListStyle.css" />
+    <Content Include="Content\css\memberListStyle.css" />
+    <Content Include="Content\css\mobile.css" />
+    <Content Include="Content\css\smallListStyle.css" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\images\banner.png" />
+    <Content Include="Content\images\banner_email.jpg" />
+    <Content Include="Content\images\church.jpg" />
+    <Content Include="Content\images\content_divider.gif" />
+    <Content Include="Content\images\content_horizontal_divider.gif" />
+    <Content Include="Content\images\edit.png" />
+    <Content Include="Content\images\excelLogo.png" />
+    <Content Include="Content\images\green_check.gif" />
+    <Content Include="Content\images\group_create.png" />
+    <Content Include="Content\images\group_join.png" />
+    <Content Include="Content\images\group_send.png" />
+    <Content Include="Content\images\icon_create.jpg" />
+    <Content Include="Content\images\icon_join.jpg" />
+    <Content Include="Content\images\img01.jpg" />
+    <Content Include="Content\images\img02.jpg" />
+    <Content Include="Content\images\img03.jpg" />
+    <Content Include="Content\images\img04.jpg" />
+    <Content Include="Content\images\img04c.jpg" />
+    <Content Include="Content\images\img05.jpg" />
+    <Content Include="Content\images\img06.gif" />
+    <Content Include="Content\images\img07.gif" />
+    <Content Include="Content\images\img08.jpg" />
+    <Content Include="Content\images\img09.jpg" />
+    <Content Include="Content\images\landing_page.jpg" />
+    <Content Include="Content\images\landing_page2.png" />
+    <Content Include="Content\images\LandPageFullLength.png" />
+    <Content Include="Content\images\loading.gif" />
+    <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\LogOnMenu.png" />
+    <Content Include="Content\images\MSW_shield.jpg" />
+    <Content Include="Content\images\MSW_shield.png" />
+    <Content Include="Content\images\MSW_shield_favicon.ico" />
+    <Content Include="Content\images\MSW_shield_favicon2.ico" />
+    <Content Include="Content\images\MSW_shield_favicon3.ico" />
+    <Content Include="Content\images\page_intro.png" />
+    <Content Include="Content\images\pdf_logo.bmp" />
+    <Content Include="Content\images\person.jpg" />
+    <Content Include="Content\images\red-x-icon.jpg" />
+    <Content Include="Content\images\red-x-icon.png" />
+    <Content Include="Content\images\stake.jpg" />
+    <Content Include="Content\images\toolMenu.png" />
+    <Content Include="Content\images\ToolMenu_bishopric.png" />
+    <Content Include="Content\images\ToolMenu_member.png" />
+    <Content Include="Content\images\ToolMenu_small.png" />
+    <Content Include="Content\images\yellow-circle-icon.png" />
+    <Content Include="Content\images\yellow-circle.png" />
+    <Content Include="Content\screenshots\callinginformation.jpg" />
+    <Content Include="Content\screenshots\callingsheet.jpg" />
+    <Content Include="Content\screenshots\joingroup.jpg" />
+    <Content Include="Content\screenshots\membersheet.jpg" />
+    <Content Include="Content\screenshots\mlsreport.jpg" />
+    <Content Include="Content\screenshots\notifications.jpg" />
+    <Content Include="Content\screenshots\searchable.jpg" />
+    <Content Include="Content\screenshots\stakeList.jpg" />
+    <Content Include="Content\screenshots\survey.jpg" />
+    <Content Include="Content\screenshots\uploadphoto.jpg" />
+    <Content Include="Content\screenshots\wardList.jpg" />
+    <Content Include="Content\screenshots\wardListPDF.jpg" />
+    <Content Include="Content\slider\images\admin_tool.jpg" />
+    <Content Include="Content\slider\images\makingmoretimeforministering.jpg" />
+    <Content Include="Content\slider\images\mysinglesward.jpg" />
+    <Content Include="Content\slider\images\safe_and_secure.jpg" />
+    <Content Include="Content\slider\nivo-slider.css" />
+    <Content Include="Content\slider\themes\default\arrows.png" />
+    <Content Include="Content\slider\themes\default\bullets.png" />
+    <Content Include="Content\slider\themes\default\default.css" />
+    <Content Include="Content\slider\themes\default\loading.gif" />
+    <Content Include="Global.asax" />
+    <Content Include="Views\Shared\Menu.ascx" />
+    <Content Include="Views\Shared\SiteMenu.ascx" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Content\Site.css" />
+    <Content Include="Views\Home\Index.aspx" />
+    <Content Include="Views\Shared\Error.aspx" />
+    <Content Include="Views\Shared\Site.Master" />
+    <Content Include="Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\admin\images\forms\bg_org.psd" />
+    <None Include="Content\admin\images\forms\header_org.psd" />
+    <None Include="Content\admin\images\forms\header_related_act.psd" />
+    <None Include="Content\admin\images\shared\nav\nav_login.psd" />
+    <None Include="Content\admin\images\shared\nav\nav_register.psd" />
+    <None Include="Content\admin\images\table\table_icon_8.psd" />
+    <None Include="Content\images\banner.psd" />
+    <None Include="Content\images\banner_email.psd" />
+    <None Include="Content\images\group.psd" />
+    <None Include="Content\images\join_a_group.psd" />
+    <None Include="Content\images\landing_page.psd" />
+    <None Include="Content\images\landing_page2.psd" />
+    <None Include="Content\images\LandPageFullLength.psd" />
+    <None Include="Content\images\logo.ai" />
+    <None Include="Content\images\logo.psd" />
+    <None Include="Content\images\ToolMenu.psd" />
+    <None Include="Content\slider\images\template.psd" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target> -->
+  <Target Name="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(ProjectDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>2223</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

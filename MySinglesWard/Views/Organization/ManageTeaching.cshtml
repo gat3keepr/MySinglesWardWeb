@@ -1,0 +1,217 @@
+﻿@model MSW.Models.ManageTeachingModel
+@{
+    var title = Model.org.Title + " - Manage " + (Model.org.ReportID == "Elders Quorum" ? "Home Teaching" : "Visiting Teaching");
+    Page.Title = title;
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+    Page.Header = Model.org.Title + " - " + (Model.org.ReportID == "Elders Quorum" ? "Home Teaching" : "Visiting Teaching");
+}
+@section MenuScript{
+    <script type="text/javascript">
+        MenuSelect("Organization", "n");
+    </script>
+}
+<div id="table-content">
+    <table>
+        <tr valign="top">
+            <td>
+                @if (Model.districts.Count() == 0)
+                {
+                    <p>
+                        You have no districts in this organization.</p>
+                }
+                else
+                {
+                    <ul id="" style="list-style-type: none">
+                        @foreach (MSW.Models.DistrictModel district in Model.districts)
+                        { 
+                            <li id="@(district.district.DistrictID)District">
+                                @{Html.RenderPartial("District", district, ViewData);}
+                            </li>
+                        }
+                    </ul>
+                }
+            </td>
+            <td>
+                <!--  start Information & Features -->
+                <div id="related-activities">
+                    <!--  start related-act-top -->
+                    <div id="related-act-top">
+                        <img src="../../Content/admin/images/forms/header_related_act.gif" width="271" height="43"
+                            alt="" />
+                    </div>
+                    <!-- end related-act-top -->
+                    <!--  start related-act-bottom -->
+                    <div id="related-act-bottom">
+                        <!-- start related-act-inner -->
+                        <div id="related-act-inner">
+                            <div class="left">
+                                <img src="../../Content/admin/images/forms/icon_edit.gif" width="21" height="21"
+                                    alt="" /></div>
+                            <div class="right">
+                                This page is used to manange your teaching assignments in your organization. Your
+                                organization is organized into districts and each district is made of companionships.
+                                Each companionship has teachers and people to teach assigned to those teachers.
+                                <br />
+                                <br />
+                                Each month the members of your organization can go and report on their assignments.
+                            </div>
+                            <div class="clear">
+                            </div>
+                            <div class="lines-dotted-short">
+                            </div>
+                            <div class="left">
+                                <span name="addDistrict" style="cursor: pointer">
+                                    <img src="../../Content/admin/images/forms/icon_plus.gif" width="21" height="21"
+                                        alt="" /></span></div>
+                            <div class="right">
+                                <span name="addDistrict" style="cursor: pointer">
+                                    <h5>
+                                        Add New District</h5>
+                                </span>
+                            </div>
+                            <div class="clear">
+                            </div>
+                            @if (Model.org.ReportID == "Elders Quorum")
+                            {
+                                <div class="lines-dotted-short">
+                                </div>
+                                <div class="left">
+                                    <span name="addOrg" style="cursor: pointer">
+                                        <img src="../../Content/admin/images/forms/icon_edit.gif" width="21" height="21"
+                                            alt="" /></span></div>
+                                <div class="right">
+                                    <span name="addOrg" style="cursor: pointer">
+                                        <h5>
+                                            Organizations to Teach</h5>
+                                    </span>
+                                </div>
+                                <div class="clear">
+                                </div>
+                            }
+                        </div>
+                        <!-- end related-act-inner -->
+                        <div class="clear">
+                        </div>
+                    </div>
+                    <!-- end related-act-bottom -->
+                </div>
+                <!-- end Information & Features -->
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img src="../../Content/admin/images/shared/blank.gif" width="695" height="1" alt="blank" />
+            </td>
+            <td>
+            </td>
+        </tr>
+    </table>
+</div>
+<!-- Add District Dialog -->
+<div id="AddDistrictDialog" title="New District">
+    @using (Html.BeginForm("NewDistrict", "Organization", FormMethod.Post, new { @id = "NewDistrict" }))
+    {
+        <table class="AddCoLeader">
+            <tr>
+                <td>
+                    District Name:
+                </td>
+                <td>
+                    @Html.TextBox("NewDistrictName")
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+@if (Model.org.ReportID == "Elders Quorum")
+{
+<!-- Organizations to Teach Dialog -->
+<div id="OrgToTeachDialog" title="Organizations To Teach">
+    <center name="loading">
+        <img src="../../Content/images/loading.gif" style="width: 100px" /></center>
+    <div id="orgToTeachList">
+    </div>
+</div>
+}
+<!-- Add Teacher Dialog -->
+<div id="AddTeacherDialog" title="Members Without Assignment">
+    <center name="loading">
+        <img src="../../Content/images/loading.gif" style="width: 100px" /></center>
+    <div id="teacherList">
+    </div>
+</div>
+<!-- Add Teachee Dialog -->
+<div id="AddTeacheeDialog" title="Members Without Teachers">
+    <center name="loading">
+        <img src="../../Content/images/loading.gif" style="width: 100px" /></center>
+    <div id="teacheeList">
+    </div>
+</div>
+<script src="../../Scripts/TeachingManagement.js" type="text/javascript"></script>
+<!-- Cloneable New Teacher -->
+<div id="newTeacher" style="display: none">
+    <li teacherid="newTeacher">
+        <table class="TeachersTable">
+            <tr>
+                <td style="width: 0px" name="teacherOptions">
+                    <span name="removeTeacher" title="Remove From Companionship" memberid=" " companionshipid=" "
+                        class="icon-10 info-tooltip"></span>
+                </td>
+                <td name="teacherName">
+                </td>
+            </tr>
+        </table>
+    </li>
+</div>
+<!-- Cloneable New Teachee -->
+<div id="newTeachee" style="display: none">
+    <li teacheeid="newTeachee">
+        <table>
+            <tr>
+                <td style="width: 0px" name="teacheeOptions">
+                    <span name="removeTeachee" title="Remove From People to Teach" class="icon-10 info-tooltip"></span>
+                </td>
+                <td name="teacheeName">
+                </td>
+            </tr>
+        </table>
+    </li>
+</div>
+<!-- Cloneable New Companionship -->
+<div style="display: none">
+    <td class="Companionship" id="clonableComp" style="display: none">
+        <div>
+            <span name="RemoveCompanionship" companionshipid=" " style="padding-top: 5px" class="addCallingLink">
+                <img src="../../Content/admin/images/forms/icon_minus_red.gif" width="13" alt="" />
+                Remove Companionship</span>
+            <p class="CompTitle">
+            </p>
+            <table class="CompanionshipTable">
+                <tr>
+                    <td style="max-width: 130px; min-width: 130px">
+                        <strong>Teachers</strong>
+                        <ul companionshipid=" ">
+                        </ul>
+                    </td>
+                    <td>
+                        <strong>People to Teach</strong>
+                        <ul companionshipid=" ">
+                        </ul>
+                    </td>
+                </tr>
+                <tr name="AddOptions">
+                    <td style="padding-bottom: 4px">
+                        <span name="AddTeacher" companionshipid=" " class="addTeachingLink">
+                            <img src="../../Content/admin/images/forms/icon_plus.gif" width="13" alt="" />
+                            Add Teacher</span>
+                    </td>
+                    <td>
+                        <span name="AddTeachee" companionshipid=" " class="addTeachingLink">
+                            <img src="../../Content/admin/images/forms/icon_plus.gif" width="13" alt="" />
+                            Add Person to Teach</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </td>
+</div>

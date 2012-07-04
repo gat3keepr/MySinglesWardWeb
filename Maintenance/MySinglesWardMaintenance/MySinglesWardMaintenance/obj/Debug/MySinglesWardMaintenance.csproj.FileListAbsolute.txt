@@ -1,0 +1,10 @@
+C:\dev\MySinglesWard\trunk\Maintenance\MySinglesWardMaintenance\MySinglesWardMaintenance\bin\MySinglesWardMaintenance.dll
+C:\dev\MySinglesWard\trunk\Maintenance\MySinglesWardMaintenance\MySinglesWardMaintenance\bin\MySinglesWardMaintenance.pdb
+C:\dev\MySinglesWard\trunk\Maintenance\MySinglesWardMaintenance\MySinglesWardMaintenance\obj\Debug\ResolveAssemblyReference.cache
+C:\dev\MySinglesWard\trunk\Maintenance\MySinglesWardMaintenance\MySinglesWardMaintenance\obj\Debug\MySinglesWardMaintenance.dll
+C:\dev\MySinglesWard\trunk\Maintenance\MySinglesWardMaintenance\MySinglesWardMaintenance\obj\Debug\MySinglesWardMaintenance.pdb
+C:\dev\msw-web\Maintenance\MySinglesWardMaintenance\MySinglesWardMaintenance\bin\MySinglesWardMaintenance.dll
+C:\dev\msw-web\Maintenance\MySinglesWardMaintenance\MySinglesWardMaintenance\bin\MySinglesWardMaintenance.pdb
+C:\dev\msw-web\Maintenance\MySinglesWardMaintenance\MySinglesWardMaintenance\obj\Debug\MySinglesWardMaintenance.csprojResolveAssemblyReference.cache
+C:\dev\msw-web\Maintenance\MySinglesWardMaintenance\MySinglesWardMaintenance\obj\Debug\MySinglesWardMaintenance.dll
+C:\dev\msw-web\Maintenance\MySinglesWardMaintenance\MySinglesWardMaintenance\obj\Debug\MySinglesWardMaintenance.pdb

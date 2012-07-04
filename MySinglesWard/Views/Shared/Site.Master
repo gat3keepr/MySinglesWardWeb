@@ -1,0 +1,181 @@
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+<meta name="description" content="MySinglesWard is a tool that helps wards and stakes with the unique problems that face singles wards. 
+                                  Members, Bishoprics, and Stakes can all use MySinglesWard to minister better in their callings." />
+<meta name="keywords" content="singles, wards, singles ward, singles wards, LDS, LDS singles, LDS singles ward, Latter-day Saints,
+                                mormon, YSA" />
+    <link rel="SHORTCUT ICON" href="../../Content/images/MSW_shield_favicon3.ico" />
+    <link rel="stylesheet" href="../../Content/admin/css/screen.css" type="text/css"
+        media="screen" title="default" />
+    <!--  jquery core -->
+    <script src="https://www.google.com/jsapi?key=ABQIAAAA3n4acc4TxEAdcutKLyKFdBSK8_ALMzkJQCVJSdvSqF4sBN-YKBQyoeSPm1UIiscmoKrWJG1ge8sWeQ"
+        type="text/javascript"></script>
+    <script type="text/javascript">
+        google.load("jquery", "1.5.2");
+    </script>    
+    <script src="../../Scripts/js/jquery-ui-1.8.7.custom.min.js" type="text/javascript"></script>
+    
+    <!-- Custom jquery scripts -->
+    <script src="../../Scripts/admin/custom_jquery.js" type="text/javascript"></script>
+    <!-- Tooltips -->
+    <script src="../../Scripts/admin/jquery.tooltip.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('a.info-tooltip ').tooltip({
+                track: true,
+                delay: 0,
+                fixPNG: true,
+                showURL: false,
+                showBody: " - ",
+                top: -35,
+                left: 5
+            });
+        });
+    </script>    
+    <!-- MUST BE THE LAST SCRIPT IN <HEAD></HEAD></HEAD> png fix -->
+    
+    <link href="../../Content/css/custom-theme/jquery-ui-1.8.13.custom.css" rel="stylesheet"
+        type="text/css" />
+    <script src="../../Scripts/admin/jquery.pngFix.pack.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(document).pngFix();
+        });
+    </script>
+    <title>
+        <asp:ContentPlaceHolder ID="TitleContent" runat="server" />
+    </title>
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-20921913-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+</head>
+<body>
+    <!-- Start: page-top-outer -->
+    <div id="page-top-outer">
+        <!-- Start: page-top -->
+        <div id="page-top">
+            <!-- start logo -->
+            <div id="logo">
+                <img src="../../Content/images/logo.png" alt="" />
+            </div>
+            <!-- end logo -->
+            <div class="clear">
+            </div>
+        </div>
+        <!-- End: page-top -->
+    </div>
+    <!-- End: page-top-outer -->
+    <div class="clear">
+        &nbsp;</div>
+    <!--Menu-->
+    <% Html.RenderPartial("SiteMenu"); %>
+    <!-- start content-outer ........................................................................................................................START -->
+    <div id="content-outer">
+        <!-- start content -->
+        <div id="content">
+            <!--  start page-heading -->
+            <div id="page-heading">
+                <asp:ContentPlaceHolder ID="ContentTitle" runat="server" />
+            </div>
+            <!-- end page-heading -->
+            <table border="0" width="100%" cellpadding="0" cellspacing="0" id="content-table">
+                <tr>
+                    <th rowspan="3" class="sized">
+                        <img src="../../Content/admin/images/shared/side_shadowleft.jpg" width="20" height="300"
+                            alt="" />
+                    </th>
+                    <th class="topleft">
+                    </th>
+                    <td id="tbl-border-top">
+                        &nbsp;
+                    </td>
+                    <th class="topright">
+                    </th>
+                    <th rowspan="3" class="sized">
+                        <img src="../../Content/admin/images/shared/side_shadowright.jpg" width="20" height="300"
+                            alt="" />
+                    </th>
+                </tr>
+                <tr>
+                    <td id="tbl-border-left">
+                    </td>
+                    <td>
+                        <!--  start content-table-inner ...................................................................... START -->
+                        <div id="content-table-inner">
+                            <!--  start table-content  -->
+                            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+                            <!--  end content-table  -->
+                            <div class="clear">
+                            </div>
+                        </div>
+                        <!--  end content-table-inner ............................................END  -->
+                    </td>
+                    <td id="tbl-border-right">
+                    </td>
+                </tr>
+                <tr>
+                    <th class="sized bottomleft">
+                    </th>
+                    <td id="tbl-border-bottom">
+                        &nbsp;
+                    </td>
+                    <th class="sized bottomright">
+                    </th>
+                </tr>
+            </table>
+            <div class="clear">
+                &nbsp;</div>
+        </div>
+        <!--  end content -->
+        <div class="clear">
+            &nbsp;</div>
+    </div>
+    <!--  end content-outer........................................................END -->
+    <div class="clear">
+        &nbsp;</div>
+    <!-- start footer -->
+    <div id="footer">
+        <!--  start footer-left -->
+        <div id="footer-left">
+            <table style="width:1181px">
+                <tr>
+                    <td>
+                        <img src="../../Content/images/MSW_shield_favicon3.ico" alt="MySinglesWard.com" />
+                    </td>
+                    <td>
+                        <span style="margin: 10px 0 0; padding: 0 10px; position: relative;">2011 MySinglesWard.com. A Porter Hoskins Production. Logo Design by <a href="http://www.davidwehle.net"
+                                style="color: Black">David Wehle</a> <a style="color: Black" href="mailto:support@mysinglesward.com">
+                                    Send Feedback & Report Bugs</a> || <a style="color: Black" href="mailto:support@mysinglesward.com">
+                                        support@MySinglesWard.com</a> || <a style="color: Black" href="/Info/Index">
+                                        About MySinglesWard.com</a></span>
+                    </td>
+                    <td>
+                        <img style="height:42px;" src="../../Content/images/App_Store_Badge_EN.png" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!--  end footer-left -->
+        <div class="clear">
+            &nbsp;</div>
+    </div>
+    <!-- end footer -->
+    <!--Menu Script-->
+    <script src="../../Scripts/MenuSelect.js" type="text/javascript"></script>
+    <asp:ContentPlaceHolder ID="MenuScript" runat="server" />
+</body>
+</html>

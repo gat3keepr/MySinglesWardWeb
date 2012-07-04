@@ -1,0 +1,437 @@
+﻿@model MSW.Model.MemberModel
+@{
+    Page.Title = "My Profile";
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+    Page.Header = Model.memberSurvey.prefName + " " + Model.user.LastName;
+}
+<table style="margin-left: 20px">
+    <tr valign="top">
+        <td>
+            <table class="ProfileText">
+                <tr>
+                    <td>
+                        <img class="ProfilePic" src="/Photo/@ViewData["Image"]" alt="Profile Picture" />
+                    </td>
+                    <td>
+                        <table style="width: 540px; margin: 17px">
+                            <tr>
+                                <td>
+                                    Current Ward:
+                                </td>
+                                <td>
+                                    @ViewData["ward"]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Phone Number:
+                                </td>
+                                <td>
+                                    @Model.memberSurvey.cellPhone
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Email:
+                                </td>
+                                <td>
+                                    @Model.user.Email
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Apartment:
+                                </td>
+                                <td>
+                                    @Model.memberSurvey.residence
+                                </td>
+                            </tr>
+                            @if (Model.memberSurvey.templeExpDate != null)
+                            { 
+                                <tr>
+                                    <td>
+                                        Temple Recommend Exp:
+                                    </td>
+                                    <td>
+                                        @String.Format("{0:M/d/yyyy}", Model.memberSurvey.templeExpDate)
+                                    </td>
+                                </tr>
+                            }
+                            @if (Model.notificationPreference != null)
+                            { 
+                                <tr>
+                                    <td>
+                                        Notification Preferences:
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink(ViewData["notificationPref"] as String, "changePref", "Account")
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <!-- Home Teachers -->
+            <table style="width: 450px">
+                <tr>
+                    <td>
+                        <h2>
+                            My Home Teachers</h2>
+                    </td>
+                </tr>
+            </table>
+            <br />
+            @if (Model.teaching.HTers.Count > 0)
+            {
+                <table class="WardList" style="margin-bottom: 30px">
+                    <tr>
+                        <td>
+                        </td>
+                        <td>
+                            <strong>Name</strong>
+                        </td>
+                        <td>
+                            <strong>Apartment</strong>
+                        </td>
+                        <td>
+                            <strong>Cell Phone</strong>
+                        </td>
+                        <td>
+                            <strong>Email</strong>
+                        </td>
+                    </tr>
+                    @foreach (var item in Model.teaching.HTers)
+                    { 
+                        <tr id="@(item.user.MemberID)X" name="@((item.memberSurvey.prefName.ToLower() + "_" + item.user.LastName.ToLower()).Replace(" ", "_"))"
+                                        type="member">
+                            <td>
+                                <img class="smallPic" src="/Photo/@item.photo.FileName" alt="Profile Picture" />
+                            </td>
+                            <td>
+                                @Html.ActionLink(item.memberSurvey.prefName + " " + item.user.LastName, "GetMember", "Home", new { memberID = item.user.MemberID }, new { @target = "_blank" })
+                            </td>
+                            <td>
+                                @item.memberSurvey.residence
+                            </td>
+                            <td>
+                                @if (item.memberSurvey.publishCell)
+                                { 
+                                    <a href="tel:+1 @item.memberSurvey.cellPhone">
+                                        @item.memberSurvey.cellPhone</a>
+                                }
+                            </td>
+                            <td>
+                                @if (item.memberSurvey.publishEmail)
+                                { 
+                                    <a href="mailto:@item.user.Email">
+                                        @item.user.Email</a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+            else
+            {
+                <p>
+                    You have not been assigned home teachers.</p>
+            }
+            <br />
+            <!-- Visiting Teachers -->
+            @try
+            {
+                if (!bool.Parse(Session["isPriesthood"] as string))
+                { 
+                <table style="width: 450px">
+                    <tr>
+                        <td>
+                            <h2>
+                                My Visiting Teachers</h2>
+                        </td>
+                    </tr>
+                </table>
+                <br />
+                    if (Model.teaching.VTers.Count > 0)
+                    {
+                <table class="WardList" style="margin-bottom: 30px">
+                    <tr>
+                        <td>
+                        </td>
+                        <td>
+                            <strong>Name</strong>
+                        </td>
+                        <td>
+                            <strong>Apartment</strong>
+                        </td>
+                        <td>
+                            <strong>Cell Phone</strong>
+                        </td>
+                        <td>
+                            <strong>Email</strong>
+                        </td>
+                    </tr>
+                    @foreach (var item in Model.teaching.VTers)
+                    { 
+                        <tr id="@(item.user.MemberID)X" name="@((item.memberSurvey.prefName.ToLower() + "_" + item.user.LastName.ToLower()).Replace(" ", "_"))"
+                                        type="member">
+                            <td>
+                                <img class="smallPic" src="/Photo/@item.photo.FileName" alt="Profile Picture" />
+                            </td>
+                            <td>
+                                @Html.ActionLink(item.memberSurvey.prefName + " " + item.user.LastName, "GetMember", "Home", new { memberID = item.user.MemberID }, new { @target = "_blank" })
+                            </td>
+                            <td>
+                                @item.memberSurvey.residence
+                            </td>
+                            <td>
+                                @if (item.memberSurvey.publishCell)
+                                { 
+                                    <a href="tel:+1 @item.memberSurvey.cellPhone">
+                                        @item.memberSurvey.cellPhone</a>
+                                }
+                            </td>
+                            <td>
+                                @if (item.memberSurvey.publishEmail)
+                                { 
+                                    <a href="mailto:@item.user.Email">
+                                        @item.user.Email</a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </table>
+                    }
+                    else
+                    {
+                <p>
+                    You have not been assigned visiting teachers.</p>
+                    }
+                <br />
+                }
+            }
+            catch
+            {
+            }
+            <!-- Callings -->
+            <table style="width: 450px">
+                <tr>
+                    <td>
+                        <h2>
+                            My Calling@(Model.Callings.Count > 1 ? "s" : "")
+                        </h2>
+                    </td>
+                    <td>
+                        @if (!User.IsInRole("Member") && !User.IsInRole("Member?"))
+                        {
+                            @Html.ActionLink("Stewardship Information - Print/Export", "GetData", "Print")
+                            <span>&nbsp;</span>
+                            <img style="width: 22px" alt="" src="../../Content/images/icon_download.jpg" />
+                        }
+                    </td>
+                </tr>
+            </table>
+            <br />
+            @if (Model.Callings.Count == 0)
+            { 
+                <p style="padding-left: 5px">
+                    You have not been assigned a calling.</p>
+            }
+            else
+            { 
+                <table style="width: 450px">
+                    @foreach (var calling in Model.Callings)
+                    { 
+                        <tr>
+                            <td style="padding-left: 5px; padding-bottom: 2px">
+                                @(calling.organization.Title + " - " + calling.calling.Title)
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+            <br />
+            <!-- Groups -->
+            <table style="width: 450px">
+                <tr>
+                    <td>
+                        <h2>
+                            My Groups</h2>
+                    </td>
+                    @if (!User.IsInRole("Member?"))
+                    {
+                        <td>
+                            @Html.ActionLink("Join a Group", "Join", "Group", null, new
+  {
+      @style = "padding-top:20px"
+  })
+                            &nbsp;
+                            <img style="width: 22px" alt="" src="../../Content/images/icon_join.jpg" />
+                        </td>
+                    }
+                    @if (User.IsInRole("Bishopric") || User.IsInRole("Elders Quorum") || User.IsInRole("Relief Society") || User.IsInRole("Activities") || User.IsInRole("FHE"))
+                    {
+                        <td>
+                            @Html.ActionLink("Create Group", "List", "Group", null, new
+  {
+      @style = "padding-top:20px"
+  })
+                            &nbsp;
+                            <img style="width: 22px" alt="" src="../../Content/images/icon_create.jpg" />
+                        </td>
+                    }
+                </tr>
+            </table>
+            <br />
+            @if (Model.GroupList.Count == 0)
+            { 
+                <p style="padding-left: 5px">
+                    You have not joined any groups.</p>
+            }
+            else
+            { 
+                <table style="width: 450px">
+                    <tr style="padding-left: 5px">
+                        <td>
+                            <strong>Name</strong>
+                        </td>
+                        <td>
+                            <strong>Type</strong>
+                        </td>
+                        <td>
+                            <strong>Leader</strong>
+                        </td>
+                        <td>
+                            <strong>Co-Leader</strong>
+                        </td>
+                    </tr>
+                    @foreach (var group in Model.GroupList)
+                    { 
+                        <tr style="padding-left: 5px">
+                            <td>
+                                @Html.ActionLink(group.Name, "Details", "Group", new { id = group.GroupID }, null)
+                            </td>
+                            <td>
+                                @Html.Label(group.Type)
+                            </td>
+                            <td>
+                                @Html.Label(group.Leader)
+                            </td>
+                            <td>
+                                @Html.Label(group.CoLeader)
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+            <div style="clear: both;">
+                &nbsp;</div>
+            <!-- end #content -->
+        </td>
+        <td>
+            <!--  start Information & Features -->
+            <div id="related-activities">
+                <!--  start related-act-top -->
+                <div id="related-act-top">
+                    <img src="../../Content/admin/images/forms/header_related_act.gif" width="271" height="43"
+                        alt="" />
+                </div>
+                <!-- end related-act-top -->
+                <!--  start related-act-bottom -->
+                <div id="related-act-bottom">
+                    <!--  start related-act-inner -->
+                    <div id="related-act-inner">
+                        <div class="left">
+                            @if (ViewData["profileComplete"] as int? == 100)
+                            { 
+                                <img src="../../Content/images/green_check.gif" width="21" height="21" alt="" />
+                            }
+                            else { }</div>
+                        <div class="right">
+                            @if (ViewData["profileComplete"] as int? == 100)
+                            { 
+                                <h5>
+                                    Profile Complete</h5>
+                            }
+                            else
+                            { 
+                                <h5>
+                                    @ViewData["profileComplete"]% of Your Profile Completed</h5>
+                                <ul class="greyarrow">
+                                    @if (ViewData["SurveyDone"] as int? < 3)
+                                    { 
+                                        <li>@Html.ActionLink("Complete Survey", "UpdateSurvey", "Home")</li>
+                                    }
+                                    @if (!(bool)ViewData["PictureDone"])
+                                    { 
+                                        <li>@Html.ActionLink("Upload Picture", "UploadPicture", "Photo")</li>
+                                    }
+                                    @if (!(bool)ViewData["NotificationsDone"])
+                                    { 
+                                        <li>@Html.ActionLink("Set Notifications", "ChangePref", "Account")</li>
+                                    }
+                                </ul>
+                            }
+                        </div>
+                        <div class="clear">
+                        </div>
+                        <div class="lines-dotted-short">
+                        </div>
+                        <div class="left">
+                            <img src="../../Content/admin/images/forms/icon_edit.gif" width="21" height="21"
+                                alt="" /></div>
+                        <div class="right">
+                            <h5>
+                                Personal Options</h5>
+                            <ul class="greyarrow">
+                                <li>@Html.ActionLink("Ward List", "WardList", "Home")</li>
+                                <li>@Html.ActionLink("Groups & Notifications", "Index", "Group")</li>
+                                <li>@Html.ActionLink("Update Survey", "UpdateSurvey", "Home")</li>
+                                <li>@Html.ActionLink("Upload Picture", "UploadPicture", "Photo")</li>
+                                @if (!User.IsInRole("Member?") && !User.IsInRole("Member"))
+                                { 
+                                    <li>@Html.ActionLink("Print/Export Stewardship Info", "GetData", "Print")</li>
+                                }
+                                @if (User.IsInRole("Clerk"))
+                                { 
+                                    <li>@Html.ActionLink("Manage Ward List", "ManageWardList", "Bishopric")</li>
+                                    <li>@Html.ActionLink("Update Residences", "UpdateResidence", "Bishopric")</li>
+                                }
+                            </ul>
+                        </div>
+                        <div class="clear">
+                        </div>
+                        @if (User.IsInRole("Bishopric"))
+                        { 
+                            <div class="lines-dotted-short">
+                            </div>
+                            <div class="left">
+                                <img src="../../Content/admin/images/forms/icon_edit.gif" width="21" height="21"
+                                    alt="" /></div>
+                            <div class="right">
+                                <h5>
+                                    @Html.ActionLink("Bishopric Options", "Index", "Bishopric")</h5>
+                            </div>
+                            <div class="clear">
+                            </div>
+                        }
+                    </div>
+                    <!-- end related-act-inner -->
+                    <div class="clear">
+                    </div>
+                </div>
+                <!-- end related-act-bottom -->
+            </div>
+            <!-- end Information & Features -->
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <img src="../../Content/admin/images/shared/blank.gif" width="695" height="1" alt="blank" />
+        </td>
+        <td>
+        </td>
+    </tr>
+</table>
+<div style="clear: both;">
+</div>

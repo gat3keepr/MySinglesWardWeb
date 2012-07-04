@@ -1,0 +1,106 @@
+﻿@model IEnumerable<MSW.Models.MSWOrganizationModel>
+@{
+    Layout = null;
+}
+<link href="../../Content/admin/css/screen.css" rel="stylesheet" type="text/css" />
+<link href="../../Content/css/custom-theme/jquery-ui-1.8.13.custom.css" rel="stylesheet"
+    type="text/css" />
+@if (Model.Count() == 0)
+{
+    @:There are no other organizations to teach.
+}
+else
+{
+    <table class="WardList">
+        <tr>
+            <td>
+            </td>
+            <td>
+                <strong>Name</strong>
+            </td>
+            <td>
+                <strong>President</strong>
+            </td>
+            <td>
+                <strong># of Members</strong>
+            </td>
+            <td>
+                <strong>Status</strong>
+            </td>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @Html.Hidden("orgID", item.org.OrgID)
+                <td>
+                    @if (item.org.ReportID == "Elders Quorum")
+                    {
+                        <img class="orgLogo" src="/Content/images/EQlogo.png" alt="@item.org.Title" />
+                    }
+                    else
+                    {
+                        <img class="orgLogo" src="/Content/images/RSlogo.png" alt="@item.org.Title" />
+                    }
+                </td>
+                <td>
+                    @item.org.Title
+                </td>
+                <td>
+                    @if (item.president != null)
+                    { 
+                        @(item.president.user.LastName + ", " + item.president.memberSurvey.prefName)
+                    }
+                </td>
+                <td>
+                    @item.orgMembers.Count
+                </td>
+                <td>
+                    @if (item.teacherOrganization == null || item.teacherOrganization.OrgID == ViewBag.OrgID)
+                    {
+                        if (item.teacherOrganization == null)
+                        {
+                        <input class="ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all"
+                            name="ToggleTeaching" buttonType="Teaching" value="Teach Organization"  orgid="@item.org.OrgID" />
+                        <input class="ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all"
+                            name="ToggleTeaching" buttonType="NotTeaching" value="Teaching" style="display: none" orgid="@item.org.OrgID" />
+                        }
+                        else
+                        {                                      
+                                                
+                        <input class="ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all"
+                            name="ToggleTeaching" buttonType="Teaching" value="Teach Organization" style="display: none" orgid="@item.org.OrgID" />
+                        <input class="ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all"
+                            name="ToggleTeaching" buttonType="NotTeaching" value="Teaching" orgid="@item.org.OrgID" />
+                        }
+
+                    }
+                    else
+                    {
+                        <p>
+                            Being taught by @item.teacherOrganization.Title</p>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+    <script type="text/javascript">
+
+        //Toggle the
+        $('[name=ToggleTeaching]').click(function () {
+            var orgID = $(this).attr('orgID');
+            $('[orgid = ' + orgID + ']').toggle();
+            var type = $(this).attr('buttonType');
+
+            $.post('/Organization/OrgToTeach?TeachingOrgID=' + orgID + '&button=' + type, function (data) {
+                if (type == "NotTeaching") {
+                    location.reload();
+                }
+            });
+
+            return false;
+        });
+        
+    
+    
+    </script>
+}

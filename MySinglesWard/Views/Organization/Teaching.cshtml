@@ -1,0 +1,169 @@
+﻿@model MSW.Models.ReportTeachingModel
+@{
+    string title = Model.org.ReportID == "Elders Quorum" ? "Report Home Teaching" : "Report Visiting Teaching";
+    Page.Title = title;
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+    Page.Header = title;
+}
+@section HeadContent
+{
+    <script src="../../Scripts/js/jquery-ui-1.8.13.custom.min.js" type="text/javascript"></script>
+}
+@section MenuScript{
+    <script type="text/javascript">
+        MenuSelect("Organization", "orgTeaching");
+    </script>
+}
+<table style="margin-left: 20px">
+    <tr valign="top">
+        <td>
+            <!-- Companions -->
+            <h2>
+                Companionship</h2>
+            @if (Model.companions.Count() == 0)
+            {
+                <p>
+                    You have not been assigned to teach with anyone.</p>
+                <br />
+                <br />
+                <br />
+            }
+            else
+            {
+                <table class="WardList" style="margin-bottom: 30px">
+                    <tr>
+                        <td>
+                        </td>
+                        <td>
+                            <strong>Name</strong>
+                        </td>
+                        <td>
+                            <strong>Apartment</strong>
+                        </td>
+                        <td>
+                            <strong>Cell Phone</strong>
+                        </td>
+                        <td>
+                            <strong>Email</strong>
+                        </td>
+                    </tr>
+                    @foreach (var item in Model.companions)
+                    { 
+                        <tr id="@(item.user.MemberID)X" name="@((item.memberSurvey.prefName.ToLower() + "_" + item.user.LastName.ToLower()).Replace(" ", "_"))"
+                                        type="member">
+                            <td>
+                                <img class="smallPic" src="/Photo/@item.photo.FileName" alt="Profile Picture" />
+                            </td>
+                            <td>
+                                @Html.ActionLink(item.memberSurvey.prefName + " " + item.user.LastName, "GetMember", "Home", new { memberID = item.user.MemberID }, new { @target = "_blank" })
+                            </td>
+                            <td>
+                                @item.memberSurvey.residence
+                            </td>
+                            <td>
+                                @if (item.memberSurvey.publishCell || User.IsInRole("Bishopric"))
+                                { 
+                                    <a href="tel:+1 @item.memberSurvey.cellPhone">
+                                        @item.memberSurvey.cellPhone</a>
+                                }
+                            </td>
+                            <td>
+                                @if (item.memberSurvey.publishEmail || User.IsInRole("Bishopric"))
+                                { 
+                                    <a href="mailto:@item.user.Email">
+                                        @item.user.Email</a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+            <!-- Teachees -->
+            <h2>
+                Members to Teach</h2>
+            @if (Model.teachees.Count() == 0)
+            {
+                <p>
+                    You have not been assigned to teach anyone.</p>
+            }
+            else
+            {                
+                <table style="width: 890px">
+                    <tr>
+                        <td class="infoColumn">
+                        </td>
+                        <td class="infoColumn">
+                            <strong>Name</strong>
+                        </td>
+                        <td>
+                            <strong>Teaching Status</strong>
+                        </td>
+                    </tr>
+                    @foreach (var teachee in Model.teachees)
+                    {
+                        var item = teachee.Key;
+                        <tr id="@(item.user.MemberID)X" name="@((item.memberSurvey.prefName.ToLower() + "_" + item.user.LastName.ToLower()).Replace(" ", "_"))"
+                                        type="member">
+                            <td class="infoColumn">
+                                <img class="smallPic" src="/Photo/@item.photo.FileName" alt="Profile Picture" />
+                            </td>
+                            <td class="nameColumn">
+                                @Html.ActionLink(item.memberSurvey.prefName + " " + item.user.LastName, "GetMember", "Home", new { memberID = item.user.MemberID }, new { @target = "_blank" })
+                            </td>
+                            <td class="TeachingStatus">
+                                @{Html.RenderPartial("TeachingStatus", teachee.Value, ViewData);}
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+        </td>
+        <td>
+            <!--  start Information & Features -->
+            <div id="related-activities">
+                <!--  start related-act-top -->
+                <div id="related-act-top">
+                    <img src="../../Content/admin/images/forms/header_related_act.gif" width="271" height="43"
+                        alt="" />
+                </div>
+                <!-- end related-act-top -->
+                <!--  start related-act-bottom -->
+                <div id="related-act-bottom">
+                    <!--  start related-act-inner -->
+                    <div id="related-act-inner">
+                        <div class="left">
+                            <img src="../../Content/admin/images/forms/icon_edit.gif" width="21" height="21"
+                                alt="" /></div>
+                        <div class="right">
+                            This page displays all your teaching information. Your companionship is at top and
+                            all the members you are assigned to teach are shown below.
+                            <br />
+                            <br />
+                            Each month, you may report on your teaching. For each member you are assigned to
+                            teach, you can select their visited status and you can request additional attention
+                            by selecting "Member Needs Attention". If that box is selected, your organization
+                            leaders will be notified.
+                        </div>
+                        <div class="clear">
+                        </div>
+                    </div>
+                    <!-- end related-act-inner -->
+                    <div class="clear">
+                    </div>
+                </div>
+                <!-- end related-act-bottom -->
+            </div>
+            <!-- end Information & Features -->
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <img src="../../Content/admin/images/shared/blank.gif" width="695" height="1" alt="blank" />
+        </td>
+        <td>
+        </td>
+    </tr>
+</table>
+<div style="clear: both;">
+</div>
+<script src="../../Scripts/ReportTeaching.js" type="text/javascript"></script>

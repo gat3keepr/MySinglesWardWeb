@@ -1,0 +1,114 @@
+﻿@model MSW.Models.Reports.OrganizationReport
+@{
+    Page.Title = "Organization Reports";
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+    Page.Header = "Organization Reports";
+    string teaching = Model.org.ReportID == "Elders Quorum" ? "Home Teaching" : "Visiting Teaching";
+}
+@section MenuScript{
+    <script type="text/javascript">
+        MenuSelect("Organization", "orgReport");
+    </script>
+}
+<div id="table-content">
+    <table>
+        <tr valign="top">
+            <td>
+                <div id="tabs" style="width:890px">
+                    <ul>
+                        <li><a href="#Dashboard">Dashboard</a></li>
+                        <li><a href="TeachingReport" title="TeachingReport"><span>@teaching</span></a></li> 
+                        <li><a href="TeachingReportByMember" title="TeachingReportByMember"><span>@teaching - By Member</span></a></li>
+                        <li><a href="CallingOverview" title="CallingOverview"><span>Calling Overview</span></a></li>
+                        <li><a href="WithoutCallings" title="WithoutCallings"><span>Members w/o Callings</span></a></li>                                               
+                    </ul>
+                    <div id="Dashboard">
+                        @{Html.RenderPartial("Dashboard", Model);}
+                    </div>
+                    <div id="CallingOverview">
+                        <center name="loading">
+                            <img src="../../Content/images/loading.gif" style="width: 100px" /></center>
+                    </div>
+                    <div id="WithoutCallings">
+                        <center name="loading">
+                            <img src="../../Content/images/loading.gif" style="width: 100px" /></center>
+                    </div>
+                    <div id="TeachingReport">
+                        <center name="loading">
+                            <img src="../../Content/images/loading.gif" style="width: 100px" /></center>
+                    </div>
+                    <div id="TeachingReportByMember">
+                        <center name="loading">
+                            <img src="../../Content/images/loading.gif" style="width: 100px" /></center>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <!--  start Information & Features -->
+                <div id="related-activities">
+                    <!--  start related-act-top -->
+                    <div id="related-act-top">
+                        <img src="../../Content/admin/images/forms/header_related_act.gif" width="271" height="43"
+                            alt="" />
+                    </div>
+                    <!-- end related-act-top -->
+                    <!--  start related-act-bottom -->
+                    <div id="related-act-bottom">
+                        <!-- start related-act-inner -->
+                        <div id="related-act-inner">
+                            <div class="left">
+                                <img src="../../Content/admin/images/forms/icon_edit.gif" width="21" height="21"
+                                    alt="" /></div>
+                            <div class="right">
+                                Here you can find all the reports available for your organization. You can get reports on the status
+                                of your organization and the status of the @teaching.ToLower() of your organization.
+                            </div>
+                            <div class="clear">
+                            </div>
+                        </div>
+                        <!-- end related-act-inner -->
+                        <div class="clear">
+                        </div>
+                    </div>
+                    <!-- end related-act-bottom -->
+                </div>
+                <!-- end Information & Features -->
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img src="../../Content/admin/images/shared/blank.gif" width="695" height="1" alt="blank" />
+            </td>
+            <td>
+            </td>
+        </tr>
+    </table>
+</div>
+<script type="text/javascript">
+    // Tabs
+    $('#tabs').tabs({
+        select: function (event, ui) {
+            $('[name=loading]').show();
+
+        },
+        show: function (event, ui) {
+            $('[name=loading]').show();
+
+        },
+        load: function (event, ui) { $('[name=loading]').hide(); },
+        ajaxOptions: {
+            error: function (xhr, status, index, anchor) {
+                if (xhr.status === 0 || xhr.readyState === 0) {
+                    $('[name=loading]').show();
+                    return;
+                }
+
+                $(anchor.hash).html(
+						"Couldn't load this report. Please try refreashing this page.");
+            },
+            cache: false
+        },
+        spinner: 'Retrieving report...'
+    });
+</script>
+

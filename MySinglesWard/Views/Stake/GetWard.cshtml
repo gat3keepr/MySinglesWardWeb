@@ -1,0 +1,163 @@
+﻿@model MSW.Models.WardList
+@{
+    Layout = null;
+}
+<table>
+    <tr valign="top">
+        <td>
+            <table border="0" width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td>
+                        <div style='padding-left: 25px'>
+                            <h3>
+                                Bishopric</h3>
+                            <table class="WardListWithCallings">
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        <strong>Name</strong>
+                                    </td>
+                                    <td>
+                                        <strong>Calling</strong>
+                                    </td>
+                                    <td>
+                                        <strong>Cell Phone</strong>
+                                    </td>
+                                    <td>
+                                        <strong>Email</strong>
+                                    </td>
+                                </tr>
+                                @foreach (var item in Model.BishopricData)
+                                { 
+                                    <tr>
+                                        <td>
+                                            <img class="smallPic" src="/Photo/@item.photo.FileName" alt="Profile Picture" />
+                                        </td>
+                                        <td>
+                                            @if (item.data.BishopricName != "")
+                                            { 
+                                                @:@Html.ActionLink(item.data.BishopricName, "GetBishopric", new { memberID = item.user.MemberID })
+					                    	}
+                                            else
+                                            { 
+                                                @:@Html.ActionLink(item.user.LastName + ", " + item.user.FirstName, "GetBishopric", new { memberID = item.user.MemberID })
+                     						}
+                                        </td>
+                                        @if (!User.IsInRole("Member?"))
+                                        { 
+                                            <td>
+                                                @item.data.BishopricCalling
+                                            </td>
+                                            <td>
+                                                <a href="tel:+1@(item.data.BishopricPhone)">
+                                                    @item.data.BishopricPhone</a>
+                                            </td>
+                                            <td>
+                                                <a href="mailto:@item.user.Email">
+                                                    @item.user.Email</a>
+                                            </td>
+                                        }
+                                    </tr>
+                                }
+                            </table>
+                            <br />
+                            <!--Member Table-->
+                            <div>
+                                <table style="width: 100%">
+                                    <tr>
+                                        <td>
+                                            <h3>
+                                                Members</h3>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <!-- Search by Name:
+                                            @Html.TextBox("searchOrgList", "", new { @id = ViewBag.orgID })-->
+                                        </td>
+                                    </tr>
+                                </table>
+                                <br />
+                            </div>
+                            <table class="WardListWithCallings">
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        <strong>Name</strong>
+                                    </td>
+                                    <td>
+                                        <strong>Apartment</strong>
+                                    </td>
+                                    <td>
+                                        <strong>Cell Phone</strong>
+                                    </td>
+                                    <td>
+                                        <strong>Email</strong>
+                                    </td>
+                                    <td>
+                                        <strong>Calling</strong>
+                                    </td>
+                                </tr>
+                                @foreach (var item in Model.MembersData)
+                                { 
+                                    <tr id="@(item.user.MemberID)X" name="@((item.memberSurvey.prefName.ToLower() + "_" + item.user.LastName.ToLower()).Replace(" ", "_"))"
+                                        type="member">
+                                        <td>
+                                            <img class="smallPic" src="/Photo/@item.photo.FileName" alt="Profile Picture" />
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink(item.memberSurvey.prefName + " " + item.user.LastName, "GetMember", "Stake", new { memberID = item.user.MemberID }, new { @target = "_blank" })
+                                        </td>
+                                        @if (!User.IsInRole("Member?"))
+                                        { 
+                                            <td>
+                                                @item.memberSurvey.residence
+                                            </td>
+                                            <td>
+                                                @if (item.memberSurvey.publishCell || User.IsInRole("Bishopric"))
+                                                { 
+                                                    <a href="tel:+1 @item.memberSurvey.cellPhone">
+                                                        @item.memberSurvey.cellPhone</a>
+                                                }
+                                            </td>
+                                            <td>
+                                                @if (item.memberSurvey.publishEmail || User.IsInRole("Bishopric"))
+                                                { 
+                                                    <a href="mailto:@item.user.Email">
+                                                        @item.user.Email</a>
+                                                }
+                                            </td>
+                                            <td>
+                                                @foreach (var calling in item.Callings)
+                                                { 
+                                                    <div style="padding-bottom: 5px">
+                                                        @calling.organization.Title
+                                                        -
+                                                        @calling.calling.Title
+                                                    </div>
+                                                }
+                                            </td>
+                                            
+                                        }
+                                    </tr>
+                                }
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <!-- end wardlist-form  -->
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <img src="../../Content/admin/images/shared/blank.gif" width="695" height="1" alt="blank" />
+        </td>
+        <td>
+        </td>
+    </tr>
+</table>
+<div class="clear">
+</div>

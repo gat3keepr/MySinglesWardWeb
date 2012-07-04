@@ -1,0 +1,60 @@
+﻿@model MSW.Models.MSWOrganizationModel
+<span class="toggle" id="addressSort"><span class="toggleText">Sort By Address</span><img
+    src="../../Content/images/refresh.png" style="width: 24px"></span> <span class="toggle"
+        style="display: none" id="nameSort"><span class="toggleText">Sort By Name</span><img
+            src="../../Content/images/refresh.png" style="width: 24px"></span>
+            
+	<script src="../../Scripts/jquery.blockUI.js" type="text/javascript"></script>
+@using (Html.BeginForm("ManageMembership", "Organization", FormMethod.Post, new { @id = "AddMembershipList" }))
+{
+    <table class="orgMembership tablesorter" id="MemberTable">
+        <thead>
+            <tr>
+                <th>
+                </th>
+                <th>
+                    <strong>Member</strong>
+                </th>
+                <th>
+                    <strong>Address</strong>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var member in Model.MembersNotInOrganization)
+            {
+                <tr>
+                    <td>@Html.CheckBox(member.user.MemberID.ToString())
+                    </td>
+                    <td>@member.user.LastName, @member.memberSurvey.prefName
+                    </td>
+                    <td>@member.memberSurvey.residence
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<script src="../../Scripts/jquery.tablesorter.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#MemberTable").tablesorter();
+
+        $('#addressSort').click(function () {
+            $(this).hide();
+            $('#nameSort').show();
+
+            var sorting = [[2, 0], [1, 0]];
+            $("#MemberTable").trigger("sorton", [sorting]);
+        });
+
+        $('#nameSort').click(function () {
+            $(this).hide();
+            $('#addressSort').show();
+
+            var sorting = [[1, 0]];
+            $("#MemberTable").trigger("sorton", [sorting]);
+        });
+    });
+</script>

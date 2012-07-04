@@ -1,0 +1,25 @@
+﻿/*
+Mobile CSS for MySinglesWard.com
+*/
+.error
+{
+    color: Red;
+}
+
+.success
+{
+    color: Green;
+}
+
+.ProfilePic
+{
+    padding: 10px;
+    border: 1px solid gray;
+    margin: 2px 26px 10px 2px;
+    float: left;
+}
+
+.ui-icon-shield
+{
+    background: url(../images/MSW_shield_favicon3.ico);
+}

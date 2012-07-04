@@ -1,0 +1,360 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="MSW" EntityNamespace="MSW.Model" ContextNamespace="MSW" Class="DBmsw" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=PORTABLE-PC;Initial Catalog=MSW;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="MSWConnectionString1" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.t_SupportedWards" Member="tSupportedWards">
+    <Type Name="tSupportedWard">
+      <Column Name="WardStakeID" Type="System.Double" DbType="Float NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Location" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Ward" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Stake" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_Pictures" Member="t_Pictures">
+    <Type Name="t_Picture">
+      <Column Name="ProfPicID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PictureData" Type="System.Data.Linq.Binary" DbType="Image NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ContentType" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="beenCropped" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tSupportedStakes" Member="tSupportedStakes">
+    <Type Name="tSupportedStake">
+      <Column Name="StakeID" Type="System.Double" DbType="Float NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Location" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Stake" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tWardStake" Member="tWardStakes">
+    <Type Name="tWardStake">
+      <Column Name="WardStakeID" Type="System.Double" DbType="Float NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="StakeID" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Approved" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tStakeData" Member="tStakeDatas">
+    <Type Name="tStakeData">
+      <Column Name="MemberID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="StakeName" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="StakeCalling" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="StakePhone" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tGroup" Member="tGroups">
+    <Type Name="tGroup">
+      <Column Name="GroupID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="WardStakeID" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Type" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="LeaderID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CoLeaderID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tMemberGroupRoles" Member="tMemberGroupRoles">
+    <Type Name="tMemberGroupRole">
+      <Column Name="MemberID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Stake" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Bishopric" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EldersQuorum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ReliefSociety" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Activities" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FHE" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tGroupUser" Member="tGroupUsers">
+    <Type Name="tGroupUser">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="GroupID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MemberID" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Leader" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tNotificationPreference" Member="tNotificationPreferences">
+    <Type Name="tNotificationPreference">
+      <Column Name="MemberID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="txt" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="carrier" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="email" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="stake" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ward" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="elders" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="reliefsociety" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="activities" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="fhe" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tMemberRoles" Member="tMemberRoles">
+    <Type Name="tMemberRole">
+      <Column Name="MemberID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Activities" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Bishopric" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Clerk" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Elders_Quorum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Emergency" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Employment" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FHE" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Institute" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Mission" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Music" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Relief_Society" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Teaching" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Temple" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_BishopricData" Member="tBishopricDatas">
+    <Type Name="tBishopricData">
+      <Column Name="MemberID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="BishopricName" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="BishopricCalling" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="BishopricPhone" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="BishopricAddress" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="WifeName" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="WifePhone" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tOrganizationCoLeader" Member="tOrganizationCoLeaders">
+    <Type Name="tOrganizationCoLeader">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="OrgID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CoLeaderID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tPendingReleases" Member="tPendingReleases">
+    <Type Name="tPendingRelease">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="WardID" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="OrgID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CallingID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MemberID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CalledDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="SustainedDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="SetApartDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tOrganization" Member="tOrganizations">
+    <Type Name="tOrganization">
+      <Column Name="OrgID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="WardID" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="LeaderCallingID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="ReportID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SortID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tCalling" Member="tCallings">
+    <Type Name="tCalling">
+      <Column Name="CallingID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="OrgID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="MemberID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Approved" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Called" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Sustained" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="SetApart" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ITStake" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="SortID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tStakeUser" Member="tStakeUsers">
+    <Type Name="tStakeUser">
+      <Column Name="MemberID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="HasPic" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="StakeID" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="isPresidency" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tStakePhoto" Member="tStakePhotos">
+    <Type Name="tStakePhoto">
+      <Column Name="MemberID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FileName" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Cropped" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_SurveyData" Member="tSurveyDatas">
+    <Type Name="tSurveyData">
+      <Column Name="SurveyID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PrefName" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Apartment" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="PublishEmail" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Birthday" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Gender" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Priesthood" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="CellPhone" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="PublishCell" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="HomeAddress" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="HomeWardStake" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="HomePhone" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="HomeBishop" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="EmergContact" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="EmergPhone" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="PrevBishops" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="TimeInWard" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Mission" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="MissionLocation" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="PlanMission" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PlanMissionTime" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="PatriarchalBlessing" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Endowed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="TempleRecommend" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="TempleExpDate" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="TempleWorker" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="EnrolledSchool" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="School" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Major" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="ReligionClass" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Employed" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Occupation" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Callings" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="MusicSkill" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MusicTalent" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="TeachSkill" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TeachDesire" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CallingPref" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Activities" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Interests" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Bishop2Know" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tMemberTalk" Member="tMemberTalks">
+    <Type Name="tMemberTalk">
+      <Column Name="MemberID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="LastSpoke" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tWardInfo" Member="tWardInfos">
+    <Type Name="tWardInfo">
+      <Column Name="WardID" Type="System.Double" DbType="Float NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="City" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="State" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Zipcode" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tPriorUnit" Member="tPriorUnits">
+    <Type Name="tPriorUnit">
+      <Column Name="MemberID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PriorUnit" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tNotification" Member="tNotifications">
+    <Type Name="tNotification">
+      <Column Name="NotificationID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="WardID" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Notification" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="isModerated" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tNote" Member="tNotes">
+    <Type Name="tNote">
+      <Column Name="NoteID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MemberID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CreatorID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="isPublic" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Note" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tPicture" Member="tPictures">
+    <Type Name="tPicture">
+      <Column Name="MemberID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FileName" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="NewPhotoFileName" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_Residences" Member="tResidences">
+    <Type Name="tResidence">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="WardStakeID" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Residence" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="StreetAddress" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="SortID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tOrganizationMember" Member="tOrganizationMembers">
+    <Type Name="tOrganizationMember">
+      <Column Name="MemberID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="OrgID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PendingOrgID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_User" Member="tUsers">
+    <Type Name="tUser">
+      <Column Name="MemberID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="UserName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="WardStakeID" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="IsBishopric" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="RecordsRequested" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tCompanionship" Member="tCompanionships">
+    <Type Name="tCompanionship">
+      <Column Name="CompanionshipID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DistrictID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tTeachingMonth" Member="tTeachingMonths">
+    <Type Name="tTeachingMonth">
+      <Column Name="TeachingMonthID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="teachingMonth" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tTeachingAssignment" Member="tTeachingAssignments">
+    <Type Name="tTeachingAssignment">
+      <Column Name="MemberID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CompanionshipID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="HTID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="VTID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tTeachingOrganization" Member="tTeachingOrganizations">
+    <Type Name="tTeachingOrganization">
+      <Column Name="TeachingOrganizationID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TeacherID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tDistrict" Member="tDistricts">
+    <Type Name="tDistrict">
+      <Column Name="DistrictID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="OrgID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DistrictLeaderID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LeaderAssigned" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tTeachingRecord" Member="tTeachingRecords">
+    <Type Name="tTeachingRecord">
+      <Column Name="TeachingRecordID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MemberID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TeachingVisitID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tTeachingVisit" Member="tTeachingVisits">
+    <Type Name="tTeachingVisit">
+      <Column Name="TeachingVisitID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MemberID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CompanionshipID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TeachingMonthID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="wasVisited" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="needsAttention" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="reported" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tTaughtRecord" Member="tTaughtRecords">
+    <Type Name="tTaughtRecord">
+      <Column Name="TaughtRecordID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MemberID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TeachingVisitID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>

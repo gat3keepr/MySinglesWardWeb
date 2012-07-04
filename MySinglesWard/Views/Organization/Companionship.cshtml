@@ -1,0 +1,74 @@
+﻿@model MSW.Models.CompanionshipModel
+@{
+    int rows = (Model.teachers.Count > Model.teachees.Count ? Model.teachers.Count : Model.teachees.Count);
+    
+}
+<div companionshipid="@Model.comp.CompanionshipID">
+    <span name="RemoveCompanionship" companionshipid="@Model.comp.CompanionshipID" style="padding-top: 5px" class="addCallingLink" onclick="RemoveCompanionship(@Model.comp.CompanionshipID)">
+        <img src="../../Content/admin/images/forms/icon_minus_red.gif" width="13" alt="" />
+        Remove Companionship</span>
+    <!--<p class="CompTitle">
+        <strong>Companionship Completion - Model.getCompletionRate()%</strong></p>-->
+    <table class="CompanionshipTable">
+        <tr>
+            <td style="max-width: 130px; min-width: 130px">
+                <strong>Teachers</strong>
+                <ul companionshipid="@(Model.comp.CompanionshipID)teachers">
+                    @foreach (var member in Model.teachers)
+                    {                            
+                        <li teacherid="@member.user.MemberID">
+                            <table class="TeachersTable">
+                                <tr>
+                                    <td style="width: 0px !important" name="teacherOptions">
+                                        <span name="removeTeacher" title="Remove From Companionship" onclick="RemoveTeacher(@(member.user.MemberID),@(Model.comp.CompanionshipID))"
+                            memberid="@member.user.MemberID" companionshipid="@Model.comp.CompanionshipID" class="icon-10 info-tooltip">
+                                        </span>
+                                    </td>
+                                    <td class="teacherName" name="teacherName">
+                                        @Html.ActionLink(member.user.LastName + ", " + member.memberSurvey.prefName, "GetMember",
+                                                            "Home", new { memberID = member.user.MemberID }, new { @target = "_blank" })
+                                    </td>
+                                </tr>
+                            </table>
+                        </li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <strong>People to Teach</strong>
+                <ul companionshipid="@(Model.comp.CompanionshipID)teachees">
+                    @foreach (var member in Model.teachees)
+                    {
+                        <li teacheeid="@member.user.MemberID">
+                            <table>
+                                <tr>
+                                    <td style="width: 0px" name="teacheeOptions">
+                                        <span name="removeTeachee" title="Remove From People to Teach" onclick="RemoveTeachee(@(member.user.MemberID),@(Model.comp.CompanionshipID))"
+                            memberid="@member.user.MemberID" teachingid="@Model.comp.CompanionshipID" class="icon-10 info-tooltip">
+                                        </span>
+                                    </td>
+                                    <td name="teacheeName">
+                                        @Html.ActionLink(member.user.LastName + ", " + member.memberSurvey.prefName, "GetMember",
+                                                            "Home", new { memberID = member.user.MemberID }, new { @target = "_blank" })
+                                    </td>
+                                </tr>
+                            </table>
+                        </li>
+                    }
+                </ul>
+            </td>
+        </tr>
+        <tr name="AddOptions">
+            <td style="padding-bottom: 4px">
+                <span name="AddTeacher" companionshipid="@Model.comp.CompanionshipID" class="addTeachingLink">
+                    <img src="../../Content/admin/images/forms/icon_plus.gif" width="13" alt="" />
+                    Add Teacher</span>
+            </td>
+            <td>
+                <span name="AddTeachee" companionshipid="@Model.comp.CompanionshipID" class="addTeachingLink">
+                    <img src="../../Content/admin/images/forms/icon_plus.gif" width="13" alt="" />
+                    Add Person to Teach</span>
+            </td>
+        </tr>
+    </table>
+</div>

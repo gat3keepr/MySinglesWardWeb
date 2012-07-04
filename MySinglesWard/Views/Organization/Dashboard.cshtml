@@ -1,0 +1,63 @@
+﻿@model MSW.Models.Reports.OrganizationReport
+<table>
+    <tr>
+        <td>
+            <div id="teaching">
+            </div>
+        </td>
+        <td>
+            <div id="callings_filled">
+            </div>
+        </td>
+    </tr>
+</table>
+@{
+    System.Text.StringBuilder rows = new System.Text.StringBuilder();
+    for (int i = Model.months.Count - 1; i >= 0; i--)
+     {
+         int monthID = Model.months[i].TeachingMonthID;
+         rows.Append("['" + MSW.Models.dbo.TeachingMonth.monthNames[Model.months[i].teachingMonth.Month - 1].Substring(0, 3) + " " +
+             Model.months[i].teachingMonth.Year + "'," + Model.teachingPercentages[monthID] + "],");
+     }
+     rows.Remove(rows.Length - 1, 1);
+     
+}
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+    google.load("visualization", "1", { packages: ["corechart"] });
+    google.setOnLoadCallback(drawChart);
+    function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Month');
+        data.addColumn('number', 'Teaching Percent');
+        data.addRows([
+            @Html.Raw(rows.ToString())
+        ]);
+
+        var options = {
+            width: 420, height: 300,
+            title: 'Teaching Percentage',
+            vAxis: { title: 'Percent', titleTextStyle: { color: 'black'}, minValue: 100 },
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('teaching'));
+        chart.draw(data, options);
+    }
+</script>
+<script type="text/javascript">
+    google.load("visualization", "1", { packages: ["corechart"] });
+    google.setOnLoadCallback(drawChart);
+    function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'callings_filled');
+        data.addColumn('number', 'Percent');
+        data.addRows(2);
+        data.setValue(0, 0, 'Callings Filled');
+        data.setValue(0, 1, eval('@Model.callingsFilled'));
+        data.setValue(1, 0, 'Callings Empty');
+        data.setValue(1, 1, eval('@Model.callingsEmpty'));
+
+        var chart = new google.visualization.PieChart(document.getElementById('callings_filled'));
+        chart.draw(data, { width: 420, height: 300, title: 'Callings Filled' });
+    }
+</script>

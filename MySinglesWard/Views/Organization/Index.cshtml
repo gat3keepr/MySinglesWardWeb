@@ -1,0 +1,255 @@
+﻿@model MSW.Models.MSWOrganizationModel
+@{
+    Page.Title = Model.org.Title;
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+    Page.Header = Model.org.Title;
+}
+@section HeadContent
+{
+    <script src="../../Scripts/js/jquery-ui-1.8.13.custom.min.js" type="text/javascript"></script>
+}
+<table style="margin-left: 20px">
+    <tr valign="top">
+        <td>
+            <table class="ProfileText">
+                <tr>
+                    <td>
+                        @if (Model.org.ReportID == "Elders Quorum")
+                        {
+                            <img src="/Content/images/EQlogo.png" alt="@Model.org.Title" />
+                        }
+                        else
+                        {
+                            <img src="/Content/images/RSlogo.png" alt="@Model.org.Title" />
+                        }
+                    </td>
+                    <td>
+                        <table style="width: 540px; margin: 17px">
+                            <tr>
+                                <td>
+                                    President:
+                                </td>
+                                <td>
+                                    @if (Model.president != null)
+                                    { 
+                                        @(Model.president.user.LastName + ", " + Model.president.memberSurvey.prefName)
+                                    }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    # of members:
+                                </td>
+                                <td>
+                                    @Model.orgMembers.Count
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @(Model.org.ReportID == "Elders Quorum" ? "Quorum's Home Teaching Percentage:" : "Relief Society's Teaching Percentage:")
+                                </td>
+                                <td>
+                                    @((int)Model.currentTeachingPercentage)%
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <div style="clear: both;">
+                &nbsp;</div>
+            <!-- end #content -->
+            @if (User.IsInRole("Elders Quorum") || User.IsInRole("Relief Society") || User.IsInRole("Bishopric"))
+            {  
+                <div id="tabs">
+                    <ul>
+                        <li><a href="#Membership">Membership Approval</a></li>
+                    </ul>
+                    <div id="Membership">
+                        @if (Model.MemberApprovals.Count == 0)
+                        { 
+                            <p>
+                                There are no memberships to approve.</p>
+                        }
+                        else
+                        { 
+                            <p>
+                                These members were just added to your organization and are waiting approval:</p>
+                            <br />
+                            <table class="ApprovalList">
+                                @foreach (var item in Model.MemberApprovals)
+                                { 
+                                    <tr id="@item.user.MemberID">
+                                        <td>
+                                            <img class="smallPic" src="/Photo/@item.photo.FileName" alt="Profile Picture" />
+                                        </td>
+                                        <td class="largerText">
+                                            @Html.Label(item.user.LastName + ", " + item.memberSurvey.prefName)
+                                        </td>
+                                        <td>
+                                            <button id="btnApprove" memberid="@item.user.MemberID" name="button" value="approve"
+                                        class="ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all">
+                                                <span class="ui-button-text">Approve</span></button>
+                                            <button id="btnDeny" memberid="@item.user.MemberID" name="button" value="deny"
+                                        class="ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all">
+                                                <span class="ui-button-text">Deny</span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                        }
+                    </div>
+                </div>
+            }
+        </td>
+        <td>
+            <!--  start Information & Features -->
+            <div id="related-activities">
+                <!--  start related-act-top -->
+                <div id="related-act-top">
+                    <img src="../../Content/admin/images/forms/header_related_act.gif" width="271" height="43"
+                        alt="" />
+                </div>
+                <!-- end related-act-top -->
+                <!--  start related-act-bottom -->
+                <div id="related-act-bottom">
+                    <!--  start related-act-inner -->
+                    <div id="related-act-inner">
+                        <div class="left">
+                            <img src="../../Content/admin/images/forms/icon_edit.gif" width="21" height="21"
+                                alt="" /></div>
+                        <div class="right">
+                            <h5>
+                                Organization Options</h5>
+                            <ul class="greyarrow">
+                                @if (Model.org.ReportID == "Elders Quorum")
+                                {
+									if (!bool.Parse(Session["IsBishopric"] as string))
+									{ 
+									<li>@Html.ActionLink("Home Teaching", "Teaching", "Organization")</li>
+									}
+                                    <li>@Html.ActionLink("Quorum Membership", "Membership", "Organization")</li>
+                                }
+                                else
+                                {
+									if (!bool.Parse(Session["IsBishopric"] as string))
+									{ 
+                                    <li>@Html.ActionLink("Visiting Teaching", "Teaching", "Organization")</li>
+									}
+                                    <li>@Html.ActionLink("Relief Society Membership", "Membership", "Organization")</li>
+                                }
+                            </ul>
+                        </div>
+                        <div class="clear">
+                        </div>
+                        @if (User.IsInRole("Elders Quorum") || User.IsInRole("Relief Society") || User.IsInRole("Bishopric") || User.IsInRole("District Leader"))
+                        {                   
+                            <div class="lines-dotted-short">
+                            </div>
+                            <div class="left">
+                                <img src="../../Content/admin/images/forms/icon_edit.gif" width="21" height="21"
+                                    alt="" /></div>
+                            <div class="right">
+                                <h5>
+                                    Leadership Options</h5>
+                                <ul class="greyarrow">
+                                    @if (User.IsInRole("Elders Quorum") || User.IsInRole("Relief Society") || User.IsInRole("Bishopric"))
+                                    {
+                                        if (Model.org.ReportID == "Elders Quorum")
+                                        {
+                                        <li>@Html.ActionLink("Manage Home Teaching", "ManageTeaching", "Organization")</li>
+                                        <li>@Html.ActionLink("Report Home Teaching", "ReportTeaching", "Organization")</li>
+                                        }
+                                        else
+                                        {
+                                        <li>@Html.ActionLink("Manage Visiting Teaching", "ManageTeaching", "Organization")</li>
+                                        <li>@Html.ActionLink("Report Visiting Teaching", "ReportTeaching", "Organization")</li>
+                                        }
+                                        <li>@Html.ActionLink("Send Notification", "SendNotification", "Group")</li>
+                                        <li>@Html.ActionLink("Reports", "Reports", "Organization")</li>
+                                    }
+                                    else
+                                    {
+                                        if (Model.org.ReportID == "Elders Quorum")
+                                        {
+                                        <li>@Html.ActionLink("Report Home Teaching", "ReportTeaching", "Organization")</li>
+                                        }
+                                        else
+                                        {
+                                        <li>@Html.ActionLink("Report Visiting Teaching", "ReportTeaching", "Organization")</li>
+                                        }
+                                    }
+                                </ul>
+                            </div>
+                            <div class="clear">
+                            </div> 
+                        }
+                    </div>
+                    <!-- end related-act-inner -->
+                    <div class="clear">
+                    </div>
+                </div>
+                <!-- end related-act-bottom -->
+            </div>
+            <!-- end Information & Features -->
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <img src="../../Content/admin/images/shared/blank.gif" width="695" height="1" alt="blank" />
+        </td>
+        <td>
+        </td>
+    </tr>
+</table>
+<div style="clear: both;">
+</div>
+<!--Dialog for Managing Quorum membership-->
+@if (User.IsInRole("Elders Quorum") || User.IsInRole("Relief Society") || User.IsInRole("Bishopric"))
+{     
+    <div id="dialog" title="Manage Membership">
+        <center id="loading">
+            <img src="../../Content/images/loading.gif" style="width: 100px" /></center>
+        <div id="membershipList">
+        </div>
+    </div>
+}
+<script type="text/javascript">
+    //Membership Approval
+    $("[id=btnApprove]").click(function () {
+
+        var memberID = $(this).attr("memberID");
+        SendApprovalRequest('approve', memberID);
+    });
+    $("[id=btnDeny]").click(function () {
+
+        var memberID = $(this).attr("memberID");
+        SendApprovalRequest('deny', memberID);
+    });
+
+    function SendApprovalRequest(button, memberID) {
+        $.ajax({
+            url: '/Organization/ApproveNewMembership',
+            data: { button: button, Memberid: memberID },
+            success: function (data) {
+                $('#' + memberID).hide();
+            },
+            error: function (error) {
+                alert("An error has occurred: " + error);
+            }
+
+        });
+    }
+
+    $(document).ready(function () {
+        // Tabs
+        var $tabs = $('#tabs').tabs(); // first tab selected
+    });
+</script>
+<script src="../../Scripts/OrganizationMembership.js" type="text/javascript"></script>
+@section MenuScript{
+    <script type="text/javascript">
+        MenuSelect("Organization", "orgProfile");
+    </script>
+}

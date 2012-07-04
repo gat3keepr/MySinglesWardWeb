@@ -1,0 +1,229 @@
+﻿@model IEnumerable<MSW.Model.MemberModel>
+@{
+    Page.Title = ViewBag.Header + " Membership";
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+    Page.Header = ViewBag.Header;
+}
+<table>
+    <tr valign="top">
+        <td>
+            <table border="0" width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td>
+                        <div style='padding-left: 25px'>
+                            <!--Member Table-->
+                            <div>
+                                <table style="width: 100%">
+                                    <tr>
+                                        <td>
+                                            <h3>
+                                                Members</h3>
+                                        </td>
+                                        <td>
+                                            <!--@using (Html.BeginForm())
+                                                {
+                                                   
+                                                @:Sort Ward List:
+                                                @Html.DropDownList("SortSelect", ViewData["DropDown"] as IEnumerable<SelectListItem>,
+                        "Choose a sort method:", new { onchange = @"this.form.submit();" });
+                                                }-->
+                                        </td>
+                                        <td>
+                                            <!-- Search by Name:
+                                            @Html.TextBox("searchOrgList", "", new { @id = ViewBag.orgID })-->
+                                        </td>
+                                    </tr>
+                                </table>
+                                <br />
+                            </div>
+                            <table class="WardList">
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        <strong>Name</strong>
+                                    </td>
+                                    <td>
+                                        <strong>Apartment</strong>
+                                    </td>
+                                    <td>
+                                        <strong>Cell Phone</strong>
+                                    </td>
+                                    <td>
+                                        <strong>Email</strong>
+                                    </td>
+                                    @if (User.IsInRole("Elders Quorum") || User.IsInRole("Relief Society") || User.IsInRole("Bishopric"))
+                                    { 
+                                        <td>
+                                        </td>
+                                    }
+                                </tr>
+                                @foreach (var item in Model)
+                                { 
+                                    <tr id="@(item.user.MemberID)X" name="@((item.memberSurvey.prefName.ToLower() + "_" + item.user.LastName.ToLower()).Replace(" ", "_"))"
+                                        type="member">
+                                        <td>
+                                            <img class="smallPic" src="/Photo/@item.photo.FileName" alt="Profile Picture" />
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink(item.memberSurvey.prefName + " " + item.user.LastName, "GetMember", "Home", new { memberID = item.user.MemberID }, new { @target = "_blank" })
+                                        </td>
+                                        @if (!User.IsInRole("Member?"))
+                                        { 
+                                            <td>
+                                                @item.memberSurvey.residence
+                                            </td>
+                                            <td>
+                                                @if (item.memberSurvey.publishCell || User.IsInRole("Bishopric"))
+                                                { 
+                                                    <a href="tel:+1 @item.memberSurvey.cellPhone">
+                                                        @item.memberSurvey.cellPhone</a>
+                                                }
+                                            </td>
+                                            <td>
+                                                @if (item.memberSurvey.publishEmail || User.IsInRole("Bishopric"))
+                                                { 
+                                                    <a href="mailto:@item.user.Email">
+                                                        @item.user.Email</a>
+                                                }
+                                            </td>
+                                        }
+                                        @if (User.IsInRole("Elders Quorum") || User.IsInRole("Relief Society") || User.IsInRole("Bishopric"))
+                                        { 
+                                            <td style="padding-left: 10px;">
+                                                <button id="remove" memberid="@item.user.MemberID" name="button" class="ui-button ui-button-text-only ui-widget ui-state-default ui-corner-all">
+                                                    <span class="ui-button-text">Remove</span></button>
+                                            </td>
+                                        }
+                                    </tr>
+                                }
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <!-- end Residence-form  -->
+        </td>
+        <td>
+            <!--  start related-activities -->
+            <div id="related-activities">
+                <!--  start related-act-top -->
+                <div id="related-act-top">
+                    <img src="../../Content/admin/images/forms/header_related_act.gif" width="271" height="43"
+                        alt="" />
+                </div>
+                <!-- end related-act-top -->
+                <!--  start related-act-bottom -->
+                <div id="related-act-bottom">
+                    <!--  start related-act-inner -->
+                    <div id="related-act-inner">
+                        <div class="left">
+                            <img src="../../Content/admin/images/forms/icon_edit.gif" width="21" height="21"
+                                alt="" /></div>
+                        <div class="right">
+                            Your organization membership list.
+                            <!-- You can also search by a person's name. -->
+                            <br />
+                            <br />
+                            Clicking on a phone number will call a person if you are on a mobile device and
+                            clicking an email address will bring up a new email message.
+                        </div>
+                        <div class="clear">
+                        </div>
+                        <!--<div class="lines-dotted-short">
+                            </div>
+                            <div class="left">
+                                <a href="" name="printWardList">
+                                    <img style="width: 22px" alt="Downlaod Ward List" src="../../Content/images/pdf_logo.bmp" /></a></div>
+                            <div class="right">
+                                <h5 name="printWardList" style="cursor: pointer">
+                                    Download Organization List</h5>
+                            </div>
+                            <div class="clear">
+                            </div>-->
+                        @if (User.IsInRole("Elders Quorum") || User.IsInRole("Relief Society") || User.IsInRole("Bishopric"))
+                        {                   
+                            <div class="lines-dotted-short">
+                            </div>
+                            <div class="left">
+                                <img src="../../Content/admin/images/forms/icon_edit.gif" width="21" height="21"
+                                    alt="" /></div>
+                            <div class="right">
+                                <h5>
+                                    Leadership Options</h5>
+                                <ul class="greyarrow">
+                                    @if (ViewBag.ReportID == "Elders Quorum")
+                                    {
+                                        <li>@Html.ActionLink("Add Quorum Members", "ManageMembership", "Organization", new { @orgID = ViewBag.orgID, @name = "ManageMembership" })</li>
+                                    }
+                                    else
+                                    {
+                                        <li>@Html.ActionLink("Add Relief Society Members", "ManageMembership", "Organization", new { @orgID = ViewBag.orgID, @name = "ManageMembership" })</li>
+                                    }
+                                </ul>
+                            </div>
+                            <div class="clear">
+                            </div> 
+                        }
+                    </div>
+                    <!-- end related-act-inner -->
+                    <div class="clear">
+                    </div>
+                </div>
+                <!-- end related-act-bottom -->
+            </div>
+            <!-- end related-activities -->
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <img src="../../Content/admin/images/shared/blank.gif" width="695" height="1" alt="blank" />
+        </td>
+        <td>
+        </td>
+    </tr>
+</table>
+<div class="clear">
+</div>
+<!--Dialog for Managing Quorum membership-->
+@if (User.IsInRole("Elders Quorum") || User.IsInRole("Relief Society") || User.IsInRole("Bishopric"))
+{     
+    <div id="dialog" title="Manage Membership">
+        <center id="loading">
+            <img src="../../Content/images/loading.gif" style="width: 100px" /></center>
+        <div id="membershipList">
+        </div>
+    </div>
+}
+<script type="text/javascript">
+    /********************
+    * Remove Member from Org
+    ********************/
+    $("[id=remove]").click(function () {
+        var memberID = $(this).attr("memberid");
+        //Display dialog box to confirm
+        var name = $("[href='/Home/GetMember?memberID=" + memberID + "']").text();
+        if (confirm("Are you sure you want to remove " + name + "?"))
+            SendRemoveRequest(memberID);
+    });
+
+    function SendRemoveRequest(memberID) {
+        $.ajax({
+            url: '/Organization/RemoveMember',
+            data: { id: memberID },
+            success: function (data) {
+                $('#' + memberID + "X").hide();
+            },
+            error: function (data) {
+                location.reload();
+            }
+        });
+    }
+</script>
+<script src="../../Scripts/WardList.js" type="text/javascript"></script>
+<script src="../../Scripts/OrganizationMembership.js" type="text/javascript"></script>
+@section MenuScript{
+    <script type="text/javascript">
+        MenuSelect("Organization", "orgMembership");
+    </script>
+}

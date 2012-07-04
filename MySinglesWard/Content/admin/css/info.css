@@ -1,0 +1,15 @@
+﻿.infoFeatures
+{
+    width: 70%;
+    line-height: 135%;   
+    padding-left: 80px;
+}
+
+.infoFeatures p
+{
+    padding: 5px;   
+}
+.infoFeatures h2
+{
+    padding-top: 10px;   
+}

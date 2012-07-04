@@ -1,0 +1,50 @@
+﻿.report
+{
+    padding: 10px;   
+}
+
+.reportTable
+{
+    width: 300px;
+    padding-bottom: 8px;   
+}
+
+.reportTable td
+{
+    padding: 3px;   
+}
+
+.reportTable input
+{
+    width: 100px;
+    padding-right: 2px;  
+}
+
+#ReleaseAll
+{
+    float: right;  
+    padding-right: 4px; 
+}
+
+#RestoreAll
+{
+    float: right;
+    padding-right: 4px;   
+}
+
+.releaseTable table
+{
+    width: 300px;
+    padding-bottom: 8px;   
+}
+
+.releaseTable td
+{
+    padding: 3px;   
+}
+
+.releaseTable input
+{
+    width: 100px;
+    padding-right: 2px;  
+}

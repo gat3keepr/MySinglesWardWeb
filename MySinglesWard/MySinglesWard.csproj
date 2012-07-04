@@ -1,0 +1,715 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C2FA4451-D2EB-4C74-9742-5530074F8E34}</ProjectGuid>
+    <ProjectTypeGuids>{e53f8fea-eae0-44a6-8774-ffd645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MSW</RootNamespace>
+    <AssemblyName>MySinglesWard</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Enyim.Caching, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\Enyim.Caching.dll</HintPath>
+    </Reference>
+    <Reference Include="Enyim.Caching.Log4NetAdapter">
+      <HintPath>.\Enyim.Caching.Log4NetAdapter.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.0.6.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="MemcachedProviders">
+      <HintPath>.\MemcachedProviders.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>.\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Recaptcha, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\Recaptcha.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Mobile" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.WebPages" />
+    <Reference Include="System.Web.Helpers" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Areas\api\apiAreaRegistration.cs" />
+    <Compile Include="Areas\api\Controllers\AuthenticationController.cs" />
+    <Compile Include="Areas\api\Controllers\MemberController.cs" />
+    <Compile Include="Areas\api\Controllers\WardController.cs" />
+    <Compile Include="Areas\api\Models\MemberMobileModel.cs" />
+    <Compile Include="Areas\api\Models\MSWMobileUser.cs" />
+    <Compile Include="Controllers\CallingController.cs" />
+    <Compile Include="Controllers\GlobalController.cs" />
+    <Compile Include="Controllers\InfoController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BishopricController.cs" />
+    <Compile Include="Controllers\GroupController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrganizationController.cs" />
+    <Compile Include="Models\dao\Companionship.cs" />
+    <Compile Include="Models\dao\District.cs" />
+    <Compile Include="Models\dao\TaughtRecord.cs" />
+    <Compile Include="Models\dao\TeachingMonth.cs" />
+    <Compile Include="Models\dao\TeachingOrganization.cs" />
+    <Compile Include="Models\dao\TeachingRecord.cs" />
+    <Compile Include="Models\dao\TeachingVisit.cs" />
+    <Compile Include="Models\dao\TeachingAssignment.cs" />
+    <Compile Include="Models\ManageTeachingModel.cs" />
+    <Compile Include="Models\Reports\OrganizationReport.cs" />
+    <Compile Include="Models\Reports\TeachingReport.cs" />
+    <Compile Include="Models\ReportTeachingModel.cs" />
+    <Compile Include="Utilities\Exceptions.cs" />
+    <Compile Include="Controllers\PhotoController.cs" />
+    <Compile Include="Controllers\PrintController.cs" />
+    <Compile Include="Controllers\StakeController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\dao\OrganizationMember.cs" />
+    <Compile Include="Models\MSWOrganizationModel.cs" />
+    <Compile Include="Utilities\CallingInitializer.cs" />
+    <Compile Include="Models\CallingReports.cs" />
+    <Compile Include="Models\CheckBoxList.cs" />
+    <Compile Include="Models\dao\BishopricData.cs" />
+    <Compile Include="Models\dao\Calling.cs" />
+    <Compile Include="Models\dao\MemberSurvey.cs" />
+    <Compile Include="Models\dao\MemberTalk.cs" />
+    <Compile Include="Models\dao\MSWUser.cs" />
+    <Compile Include="Models\dao\Note.cs" />
+    <Compile Include="Models\dao\Notification.cs" />
+    <Compile Include="Models\dao\NotificationPreference.cs" />
+    <Compile Include="Models\dao\Organization.cs" />
+    <Compile Include="Models\dao\OrganizationCoLeader.cs" />
+    <Compile Include="Models\dao\PendingRelease.cs" />
+    <Compile Include="Models\dao\Photo.cs" />
+    <Compile Include="Models\dao\PriorUnit.cs" />
+    <Compile Include="Models\dao\Residence.cs" />
+    <Compile Include="Models\dao\Stake.cs" />
+    <Compile Include="Models\dao\StakeData.cs" />
+    <Compile Include="Models\dao\StakePhoto.cs" />
+    <Compile Include="Models\dao\StakeUser.cs" />
+    <Compile Include="Models\dao\Ward.cs" />
+    <Compile Include="Models\dao\WardInfo.cs" />
+    <Compile Include="Models\dao\WardStake.cs" />
+    <Compile Include="Models\GeneratePDF.cs" />
+    <Compile Include="Models\DropDowns.cs" />
+    <Compile Include="Utilities\Encryption.cs" />
+    <Compile Include="Models\GenerateCSV.cs" />
+    <Compile Include="Models\Group.cs" />
+    <Compile Include="Models\GroupListModel.cs" />
+    <Compile Include="Models\GroupType.cs" />
+    <Compile Include="Models\ImageResult.cs" />
+    <Compile Include="Models\MemberModel.cs" />
+    <Compile Include="Models\MSW.cs">
+      <DependentUpon>MSW.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MSW.designer.cs">
+      <DependentUpon>MSW.dbml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Utilities\ImageProcessor.cs" />
+    <Compile Include="Utilities\MSWtools.cs" />
+    <Compile Include="Models\NotificationModel.cs" />
+    <Compile Include="Models\CallingsModel.cs" />
+    <Compile Include="Models\OrganizationType.cs" />
+    <Compile Include="Models\StakeListModel.cs" />
+    <Compile Include="Models\StakeUserModel.cs" />
+    <Compile Include="Models\StakeModel.cs" />
+    <Compile Include="Models\StakeWardModel.cs" />
+    <Compile Include="Models\BishopricModel.cs" />
+    <Compile Include="Models\Groups\Ward.cs" />
+    <Compile Include="Models\WardListModel.cs" />
+    <Compile Include="Models\WardModel.cs" />
+    <Compile Include="Utilities\Cache.cs" />
+    <Compile Include="Utilities\Repository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\admin\css\callingReport.css" />
+    <Content Include="Content\admin\css\datePicker.css" />
+    <Content Include="Content\admin\css\info.css" />
+    <Content Include="Content\admin\css\pro_dropline.css" />
+    <Content Include="Content\admin\css\pro_dropline_ie.css" />
+    <Content Include="Content\admin\css\screen.css" />
+    <Content Include="Content\admin\css\teachingReport.css" />
+    <Content Include="Content\admin\images\forms\bg_org.png" />
+    <Content Include="Content\admin\images\forms\bg_org_blue.png" />
+    <Content Include="Content\admin\images\forms\bg_related_act.gif" />
+    <Content Include="Content\admin\images\forms\bubble_inner.gif" />
+    <Content Include="Content\admin\images\forms\bubble_left.gif" />
+    <Content Include="Content\admin\images\forms\bubble_right.gif" />
+    <Content Include="Content\admin\images\forms\choose-file.gif" />
+    <Content Include="Content\admin\images\forms\error_left.gif" />
+    <Content Include="Content\admin\images\forms\error_right.gif" />
+    <Content Include="Content\admin\images\forms\form_inp.gif" />
+    <Content Include="Content\admin\images\forms\form_inp_error.gif" />
+    <Content Include="Content\admin\images\forms\form_reset.gif" />
+    <Content Include="Content\admin\images\forms\form_select.gif" />
+    <Content Include="Content\admin\images\forms\form_select_small.gif" />
+    <Content Include="Content\admin\images\forms\form_submit.gif" />
+    <Content Include="Content\admin\images\forms\form_textarea.gif" />
+    <Content Include="Content\admin\images\forms\header_org_minus.png" />
+    <Content Include="Content\admin\images\forms\header_org_plus.png" />
+    <Content Include="Content\admin\images\forms\header_related_act.gif" />
+    <Content Include="Content\admin\images\forms\icon_calendar.jpg" />
+    <Content Include="Content\admin\images\forms\icon_edit.gif" />
+    <Content Include="Content\admin\images\forms\icon_list_arrow.gif" />
+    <Content Include="Content\admin\images\forms\icon_minus.gif" />
+    <Content Include="Content\admin\images\forms\icon_minus_red.gif" />
+    <Content Include="Content\admin\images\forms\icon_plus.gif" />
+    <Content Include="Content\admin\images\forms\icon_plus.png" />
+    <Content Include="Content\admin\images\forms\lines_dotted_short.gif" />
+    <Content Include="Content\admin\images\forms\step_1.gif" />
+    <Content Include="Content\admin\images\forms\step_dark_left.gif" />
+    <Content Include="Content\admin\images\forms\step_dark_right.gif" />
+    <Content Include="Content\admin\images\forms\step_dark_round.gif" />
+    <Content Include="Content\admin\images\forms\step_light_left.gif" />
+    <Content Include="Content\admin\images\forms\step_light_right.gif" />
+    <Content Include="Content\admin\images\forms\step_light_round.gif" />
+    <Content Include="Content\admin\images\forms\upload_file.gif" />
+    <Content Include="Content\admin\images\login\icon_back_login.gif" />
+    <Content Include="Content\admin\images\login\inp_login.gif" />
+    <Content Include="Content\admin\images\login\loginbox_bg.png" />
+    <Content Include="Content\admin\images\login\login_bg.jpg" />
+    <Content Include="Content\admin\images\login\submit_login.gif" />
+    <Content Include="Content\admin\images\shared\blank.gif" />
+    <Content Include="Content\admin\images\shared\border_bit.jpg" />
+    <Content Include="Content\admin\images\shared\cal_th_repeat.jpg" />
+    <Content Include="Content\admin\images\shared\cal_top_bg.jpg" />
+    <Content Include="Content\admin\images\shared\cal_top_repeat.jpg" />
+    <Content Include="Content\admin\images\shared\checkbox.gif" />
+    <Content Include="Content\admin\images\shared\content_repeat.jpg" />
+    <Content Include="Content\admin\images\shared\corner_bottom_left.jpg" />
+    <Content Include="Content\admin\images\shared\corner_bottom_right.jpg" />
+    <Content Include="Content\admin\images\shared\corner_top_left.jpg" />
+    <Content Include="Content\admin\images\shared\corner_top_right.jpg" />
+    <Content Include="Content\admin\images\shared\icon_idlogo.jpg" />
+    <Content Include="Content\admin\images\shared\logo.png" />
+    <Content Include="Content\admin\images\shared\nav\account_drop_bg.gif" />
+    <Content Include="Content\admin\images\shared\nav\account_line.gif" />
+    <Content Include="Content\admin\images\shared\nav\back_0.gif" />
+    <Content Include="Content\admin\images\shared\nav\back_1x.gif" />
+    <Content Include="Content\admin\images\shared\nav\Copy of pro_line_1.gif" />
+    <Content Include="Content\admin\images\shared\nav\divider.jpg" />
+    <Content Include="Content\admin\images\shared\nav\icon_acc_inbox.gif" />
+    <Content Include="Content\admin\images\shared\nav\icon_acc_personal.gif" />
+    <Content Include="Content\admin\images\shared\nav\icon_acc_projects.gif" />
+    <Content Include="Content\admin\images\shared\nav\icon_acc_settings.gif" />
+    <Content Include="Content\admin\images\shared\nav\icon_acc_stats.gif" />
+    <Content Include="Content\admin\images\shared\nav\nav_login.png" />
+    <Content Include="Content\admin\images\shared\nav\nav_logout.gif" />
+    <Content Include="Content\admin\images\shared\nav\nav_logout.png" />
+    <Content Include="Content\admin\images\shared\nav\nav_myaccount.gif" />
+    <Content Include="Content\admin\images\shared\nav\nav_myaccount.png" />
+    <Content Include="Content\admin\images\shared\nav\nav_register.png" />
+    <Content Include="Content\admin\images\shared\nav\pro_line_1.gif" />
+    <Content Include="Content\admin\images\shared\nav\pro_line_2.gif" />
+    <Content Include="Content\admin\images\shared\nav\repeat.jpg" />
+    <Content Include="Content\admin\images\shared\side_shadowleft.jpg" />
+    <Content Include="Content\admin\images\shared\side_shadowright.jpg" />
+    <Content Include="Content\admin\images\shared\top_bg.jpg" />
+    <Content Include="Content\admin\images\shared\top_search_btn.gif" />
+    <Content Include="Content\admin\images\shared\top_search_inp.gif" />
+    <Content Include="Content\admin\images\shared\top_search_select.gif" />
+    <Content Include="Content\admin\images\shared\year_next.gif" />
+    <Content Include="Content\admin\images\shared\year_prev.gif" />
+    <Content Include="Content\admin\images\table\actions_slider_bg.gif" />
+    <Content Include="Content\admin\images\table\action_delete.gif" />
+    <Content Include="Content\admin\images\table\action_edit.gif" />
+    <Content Include="Content\admin\images\table\content_round_repeat.jpg" />
+    <Content Include="Content\admin\images\table\content_round_top.jpg" />
+    <Content Include="Content\admin\images\table\dropdown_actions.gif" />
+    <Content Include="Content\admin\images\table\icon_close_blue.gif" />
+    <Content Include="Content\admin\images\table\icon_close_green.gif" />
+    <Content Include="Content\admin\images\table\icon_close_red.gif" />
+    <Content Include="Content\admin\images\table\icon_close_yellow.gif" />
+    <Content Include="Content\admin\images\table\message_blue.gif" />
+    <Content Include="Content\admin\images\table\message_green.gif" />
+    <Content Include="Content\admin\images\table\message_red.gif" />
+    <Content Include="Content\admin\images\table\message_yellow.gif" />
+    <Content Include="Content\admin\images\table\paging_far_left.gif" />
+    <Content Include="Content\admin\images\table\paging_far_right.gif" />
+    <Content Include="Content\admin\images\table\paging_left.gif" />
+    <Content Include="Content\admin\images\table\paging_right.gif" />
+    <Content Include="Content\admin\images\table\select_number_rows.gif" />
+    <Content Include="Content\admin\images\table\table_header.jpg" />
+    <Content Include="Content\admin\images\table\table_header_checkbox.jpg" />
+    <Content Include="Content\admin\images\table\table_header_options.jpg" />
+    <Content Include="Content\admin\images\table\table_header_repeat.jpg" />
+    <Content Include="Content\admin\images\table\table_icon_1.gif" />
+    <Content Include="Content\admin\images\table\table_icon_10.gif" />
+    <Content Include="Content\admin\images\table\table_icon_2.gif" />
+    <Content Include="Content\admin\images\table\table_icon_3.gif" />
+    <Content Include="Content\admin\images\table\table_icon_4.gif" />
+    <Content Include="Content\admin\images\table\table_icon_5.gif" />
+    <Content Include="Content\admin\images\table\table_icon_6.gif" />
+    <Content Include="Content\admin\images\table\table_icon_7.gif" />
+    <Content Include="Content\admin\images\table\table_icon_8.gif" />
+    <Content Include="Content\admin\images\table\table_icon_9.png" />
+    <Content Include="Content\admin\images\table\table_sort_arrow.gif" />
+    <Content Include="Content\css\custom-theme\images\ui-bg_flat_100_fcfdfd_40x100.png" />
+    <Content Include="Content\css\custom-theme\images\ui-bg_flat_55_999999_40x100.png" />
+    <Content Include="Content\css\custom-theme\images\ui-bg_flat_75_aaaaaa_40x100.png" />
+    <Content Include="Content\css\custom-theme\images\ui-bg_glass_55_f8da4e_1x400.png" />
+    <Content Include="Content\css\custom-theme\images\ui-bg_glass_75_79c9ec_1x400.png" />
+    <Content Include="Content\css\custom-theme\images\ui-bg_glass_80_a0adca_1x400green.png" />
+    <Content Include="Content\css\custom-theme\images\ui-bg_glass_80_a0adca_1x400red.png" />
+    <Content Include="Content\css\custom-theme\images\ui-bg_gloss-wave_45_e14f1c_500x100.png" />
+    <Content Include="Content\css\custom-theme\images\ui-bg_gloss-wave_50_5f8281_500x100.png" />
+    <Content Include="Content\css\custom-theme\images\ui-bg_highlight-soft_100_1c2d58_1x100.png" />
+    <Content Include="Content\css\custom-theme\images\ui-bg_highlight-soft_45_415882_1x100.png" />
+    <Content Include="Content\css\custom-theme\images\ui-icons_0078ae_256x240.png" />
+    <Content Include="Content\css\custom-theme\images\ui-icons_056b93_256x240.png" />
+    <Content Include="Content\css\custom-theme\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Content\css\custom-theme\images\ui-icons_e0fdff_256x240.png" />
+    <Content Include="Content\css\custom-theme\images\ui-icons_f7a50d_256x240.png" />
+    <Content Include="Content\css\custom-theme\images\ui-icons_fcd113_256x240.png" />
+    <Content Include="Content\css\custom-theme\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\css\custom-theme\jquery-ui-1.8.13.custom.css" />
+    <Content Include="Content\images\App_Store_Badge_EN.png" />
+    <Content Include="Content\images\banner.png" />
+    <Content Include="Content\images\banner_email.jpg" />
+    <Content Include="Content\images\church.jpg" />
+    <Content Include="Content\images\edit.png" />
+    <Content Include="Content\images\EQLogo.png" />
+    <Content Include="Content\images\excelLogo.png" />
+    <Content Include="Content\images\ex_point.jpg" />
+    <Content Include="Content\images\front_page_tile.png" />
+    <Content Include="Content\images\green_check.gif" />
+    <Content Include="Content\images\group_create.png" />
+    <Content Include="Content\images\group_join.png" />
+    <Content Include="Content\images\group_send.png" />
+    <Content Include="Content\images\icon_create.jpg" />
+    <Content Include="Content\images\icon_download.jpg" />
+    <Content Include="Content\images\icon_join.jpg" />
+    <Content Include="Content\images\img01.jpg" />
+    <Content Include="Content\images\img02.jpg" />
+    <Content Include="Content\images\img03.jpg" />
+    <Content Include="Content\images\img04.jpg" />
+    <Content Include="Content\images\img04c.jpg" />
+    <Content Include="Content\images\img05.jpg" />
+    <Content Include="Content\images\img06.gif" />
+    <Content Include="Content\images\img07.gif" />
+    <Content Include="Content\images\img08.jpg" />
+    <Content Include="Content\images\img09.jpg" />
+    <Content Include="Content\images\landing_page.jpg" />
+    <Content Include="Content\images\landing_page2.png" />
+    <Content Include="Content\images\LandPageFullLength.png" />
+    <Content Include="Content\images\loading.gif" />
+    <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\LogOnMenu.png" />
+    <Content Include="Content\images\MSW_shield.jpg" />
+    <Content Include="Content\images\MSW_shield.png" />
+    <Content Include="Content\images\MSW_shield_favicon3.ico" />
+    <Content Include="Content\images\page_intro.png" />
+    <Content Include="Content\images\pdf_logo.bmp" />
+    <Content Include="Content\images\person.jpg" />
+    <Content Include="Content\images\red-x-icon.jpg" />
+    <Content Include="Content\images\red-x-icon.png" />
+    <Content Include="Content\images\refresh.png" />
+    <Content Include="Content\images\RSLogo.png" />
+    <Content Include="Content\images\stake.jpg" />
+    <Content Include="Content\images\content_horizontal_divider.gif" />
+    <Content Include="Content\images\content_divider.gif" />
+    <Content Include="Content\images\ToolMenu_bishopric.png" />
+    <Content Include="Content\images\ToolMenu_member.png" />
+    <Content Include="Content\images\ToolMenu_small.png" />
+    <Content Include="Content\images\yellow-circle-icon.png" />
+    <Content Include="Content\images\yellow-circle.png" />
+    <Content Include="Content\screenshots\callinginformation.jpg" />
+    <Content Include="Content\screenshots\callingReports.jpg" />
+    <Content Include="Content\screenshots\callings.jpg" />
+    <Content Include="Content\screenshots\callingsheet.jpg" />
+    <Content Include="Content\screenshots\joingroup.jpg" />
+    <Content Include="Content\screenshots\membersheet.jpg" />
+    <Content Include="Content\screenshots\mlsreport.jpg" />
+    <Content Include="Content\screenshots\notifications.jpg" />
+    <Content Include="Content\screenshots\searchable.jpg" />
+    <Content Include="Content\screenshots\stakeList.jpg" />
+    <Content Include="Content\screenshots\stewardship.jpg" />
+    <Content Include="Content\screenshots\survey.jpg" />
+    <Content Include="Content\screenshots\uploadphoto.jpg" />
+    <Content Include="Content\screenshots\wardList.jpg" />
+    <Content Include="Content\screenshots\wardListPDF.jpg" />
+    <Content Include="Content\slider\images\admin_tool.jpg" />
+    <Content Include="Content\slider\images\makingmoretimeforministering.jpg" />
+    <Content Include="Content\slider\images\mysinglesward.jpg" />
+    <Content Include="Content\slider\images\safe_and_secure.jpg" />
+    <Content Include="Content\slider\nivo-slider.css" />
+    <Content Include="Content\slider\themes\default\arrows.png" />
+    <Content Include="Content\slider\themes\default\bullets.png" />
+    <Content Include="Content\slider\themes\default\default.css" />
+    <Content Include="Content\slider\themes\default\loading.gif" />
+    <Content Include="Enyim.Caching.dll" />
+    <Content Include="FiftyOne.Foundation.dll" />
+    <Content Include="FiftyOne.Foundation.xml" />
+    <Content Include="Global.asax" />
+    <Content Include="itextsharp.dll" />
+    <Content Include="Recaptcha.dll" />
+    <Content Include="Recaptcha.pdb" />
+    <Content Include="Scripts\admin\Copy of custom_jquery.js" />
+    <Content Include="Scripts\admin\custom_jquery.js" />
+    <Content Include="Scripts\admin\date.js" />
+    <Content Include="Scripts\admin\jquery-1.4.1.min.js" />
+    <Content Include="Scripts\admin\jquery.bind.js" />
+    <Content Include="Scripts\admin\jquery.datePicker.js" />
+    <Content Include="Scripts\admin\jquery.dimensions.js" />
+    <Content Include="Scripts\admin\jquery.filestyle.js" />
+    <Content Include="Scripts\admin\jquery.pngFix.pack.js" />
+    <Content Include="Scripts\admin\jquery.selectbox-0.5.js" />
+    <Content Include="Scripts\admin\jquery.selectbox-0.5_style_2.js" />
+    <Content Include="Scripts\admin\jquery.selectbox-0.5_style_3.js" />
+    <Content Include="Scripts\admin\jquery.tooltip.js" />
+    <Content Include="Scripts\admin\jquery.usermode.js" />
+    <Content Include="Scripts\admin\ui.checkbox.js" />
+    <Content Include="Scripts\admin\ui.core.js" />
+    <Content Include="Scripts\Callings.js" />
+    <Content Include="Scripts\jquery.color.js" />
+    <Content Include="Scripts\jquery.mobile-1.0a4\images\ajax-loader.png" />
+    <Content Include="Scripts\jquery.mobile-1.0a4\images\icon-search-black.png" />
+    <Content Include="Scripts\jquery.mobile-1.0a4\images\icons-18-black.png" />
+    <Content Include="Scripts\jquery.mobile-1.0a4\images\icons-18-white.png" />
+    <Content Include="Scripts\jquery.mobile-1.0a4\images\icons-36-black.png" />
+    <Content Include="Scripts\jquery.mobile-1.0a4\images\icons-36-white.png" />
+    <Content Include="Scripts\jquery.mobile-1.0a4\jquery.mobile-1.0a4.css" />
+    <Content Include="Scripts\jquery.mobile-1.0a4\jquery.mobile-1.0a4.js" />
+    <Content Include="Scripts\jquery.tablesorter.min.js" />
+    <Content Include="Scripts\js\jquery-ui-1.8.13.custom.min.js" />
+    <Content Include="Scripts\Menu.js" />
+    <Content Include="Scripts\jquery.blockUI.js" />
+    <Content Include="Scripts\jquery.textareaCounter.plugin.js" />
+    <Content Include="Scripts\LogonMenu.js" />
+    <Content Include="Scripts\MenuSelect.js" />
+    <Content Include="Scripts\OrganizationMembership.js" />
+    <Content Include="Scripts\ReportTeaching.js" />
+    <Content Include="Scripts\SearchEntireStakeList.js" />
+    <Content Include="Scripts\jquery.Jcrop.css" />
+    <Content Include="Scripts\jquery.Jcrop.js" />
+    <Content Include="Scripts\jquery.Jcrop.min.js" />
+    <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\js\jquery-1.4.4.min.js" />
+    <Content Include="Scripts\js\jquery-ui-1.8.7.custom.min.js" />
+    <Content Include="Scripts\RegisterScript.js" />
+    <Content Include="Scripts\SearchStakeWardList.js" />
+    <Content Include="Scripts\SelectStakeScript.js" />
+    <Content Include="Scripts\SelectWardScript.js" />
+    <Content Include="Scripts\slider\jquery.nivo.slider.js" />
+    <Content Include="Scripts\slider\jquery.nivo.slider.pack.js" />
+    <Content Include="Scripts\SurveyScript.js" />
+    <Content Include="Scripts\TeachingManagement.js" />
+    <Content Include="Scripts\WardList.js" />
+    <Content Include="Views\Account\BishopricForm.ascx" />
+    <Content Include="Views\Account\BishopricRegister.aspx" />
+    <Content Include="Views\Account\FailRecover.aspx" />
+    <Content Include="Views\Account\ForgotPassword.aspx" />
+    <Content Include="Views\Account\MemberForm.ascx" />
+    <Content Include="Views\Account\MemberRegister.aspx" />
+    <Content Include="Views\Account\NotificationPreferences.ascx" />
+    <Content Include="Views\Account\PrivacyStatement.ascx" />
+    <Content Include="Views\Account\RegisterSidebar.ascx" />
+    <Content Include="Views\Account\StakeForm.ascx" />
+    <Content Include="Views\Account\StakeRegister.aspx" />
+    <Content Include="Views\Account\SuccessRecover.aspx" />
+    <Content Include="Views\Bishopric\BishopricData.aspx" />
+    <Content Include="Views\Bishopric\Index.aspx" />
+    <Content Include="Views\Bishopric\JoinStake.aspx" />
+    <Content Include="Views\Bishopric\ManageWardList.aspx" />
+    <Content Include="Views\Calling\Approved.aspx" />
+    <Content Include="Views\Calling\Called.aspx" />
+    <Content Include="Views\Calling\Calling.ascx" />
+    <Content Include="Views\Calling\CallingOverview.aspx" />
+    <Content Include="Views\Calling\Dashboard.ascx" />
+    <Content Include="Views\Calling\Index.aspx" />
+    <Content Include="Views\Calling\ITS.aspx" />
+    <Content Include="Views\Calling\NoSurvey.aspx" />
+    <Content Include="Views\Calling\Organization.ascx" />
+    <Content Include="Views\Calling\Recommended.aspx" />
+    <Content Include="Views\Calling\Releases.aspx" />
+    <Content Include="Views\Calling\Reports.aspx" />
+    <Content Include="Views\Calling\ReportTable.ascx" />
+    <Content Include="Views\Calling\Sustained.aspx" />
+    <Content Include="Views\Calling\WithoutCallings.aspx" />
+    <Content Include="Views\Global\LogOn.aspx" />
+    <Content Include="Views\Global\Success.aspx" />
+    <Content Include="Views\Global\UnlockUser.aspx" />
+    <Content Include="Views\Global\UpdateName.aspx" />
+    <Content Include="Views\Global\WardPasswords.aspx" />
+    <Content Include="Views\Group\EditForm.ascx" />
+    <Content Include="Views\Group\NoGroups.aspx" />
+    <Content Include="Views\Group\SentFail.aspx" />
+    <Content Include="Views\Group\Details.aspx" />
+    <Content Include="Views\Group\Edit.aspx" />
+    <Content Include="Views\Group\Join.aspx" />
+    <Content Include="Views\Group\List.aspx" />
+    <Content Include="Views\Group\Create.ascx" />
+    <Content Include="Views\Group\Sent.aspx" />
+    <Content Include="Views\Home\Error.aspx" />
+    <Content Include="Views\Info\callingInfo.aspx" />
+    <Content Include="Views\Info\callingSheet.aspx" />
+    <Content Include="Views\Info\stewardship.aspx" />
+    <Content Include="Views\Info\callingreports.aspx" />
+    <Content Include="Views\Info\callings.aspx" />
+    <Content Include="Views\Info\faq.aspx" />
+    <Content Include="Views\Info\gettingStarted.aspx" />
+    <Content Include="Views\Info\groups.aspx" />
+    <Content Include="Views\Info\Index.aspx" />
+    <Content Include="Views\Info\listPDF.aspx" />
+    <Content Include="Views\Info\memberSheet.aspx" />
+    <Content Include="Views\Info\membershipReport.aspx" />
+    <Content Include="Views\Info\notifications.aspx" />
+    <Content Include="Views\Info\password.aspx" />
+    <Content Include="Views\Info\reports.aspx" />
+    <Content Include="Views\Info\searchable.aspx" />
+    <Content Include="Views\Info\stakeReports.aspx" />
+    <Content Include="Views\Info\survey.aspx" />
+    <Content Include="Views\Info\uploadPicture.aspx" />
+    <Content Include="Views\Info\wardList.aspx" />
+    <Content Include="Views\Info\wardListCreation.aspx" />
+    <Content Include="Views\Info\welcome.aspx" />
+    <Content Include="Views\Shared\Menu.ascx" />
+    <Content Include="Views\Shared\PasswordMatchError.aspx" />
+    <Content Include="Views\Shared\SiteMenu.ascx" />
+    <Content Include="Views\Shared\StakeMenu.ascx" />
+    <Content Include="Views\Shared\SuccessRecover.aspx" />
+    <Content Include="Views\Bishopric\UpdateResidence.aspx" />
+    <Content Include="Views\Bishopric\SelectWard.aspx" />
+    <Content Include="Views\Group\Index.aspx" />
+    <Content Include="Views\Home\GetBishopric.aspx" />
+    <Content Include="Views\Photo\BishopCrop.aspx" />
+    <Content Include="Views\Photo\StakeResize.aspx" />
+    <Content Include="Views\Bishopric\WardExists.aspx" />
+    <Content Include="Views\Home\ChangeWard.aspx" />
+    <Content Include="Views\Home\GetMember.aspx" />
+    <Content Include="Views\Home\Index.aspx" />
+    <Content Include="Views\Home\NotApproved.aspx" />
+    <Content Include="Views\Home\NotInWard.aspx" />
+    <Content Include="Views\Home\SelectWardStake.aspx" />
+    <Content Include="Views\Home\IntroPage.aspx" />
+    <Content Include="Views\Home\TakeSurvey.aspx" />
+    <Content Include="Views\Home\UpdateSurvey.aspx" />
+    <Content Include="Views\Home\SurveyForm.ascx" />
+    <Content Include="Views\Home\WardList.aspx" />
+    <Content Include="Views\Photo\Resize.aspx" />
+    <Content Include="Views\Photo\UploadPicture.aspx" />
+    <Content Include="Views\Photo\UploadStakePicture.aspx" />
+    <Content Include="Views\Print\Activities.ascx" />
+    <Content Include="Views\Print\Bishopric.ascx" />
+    <Content Include="Views\Print\Clerk.ascx" />
+    <Content Include="Views\Print\EldersQuorum.ascx" />
+    <Content Include="Views\Print\Emergency.ascx" />
+    <Content Include="Views\Print\Employment.ascx" />
+    <Content Include="Views\Print\FamHist.ascx" />
+    <Content Include="Views\Print\FHE.ascx" />
+    <Content Include="Views\Print\GetData.aspx" />
+    <Content Include="Views\Print\GetStakeData.aspx" />
+    <Content Include="Views\Print\Institute.ascx" />
+    <Content Include="Views\Print\Mission.ascx" />
+    <Content Include="Views\Print\Music.ascx" />
+    <Content Include="Views\Print\ReliefSociety.ascx" />
+    <Content Include="Views\Print\Teaching.ascx" />
+    <Content Include="Views\Home\Unauthorized.aspx" />
+    <Content Include="Scripts\jquery-1.4.1.js" />
+    <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\MicrosoftAjax.js" />
+    <Content Include="Scripts\MicrosoftAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Views\Account\ChangePref.aspx" />
+    <Content Include="Views\Account\ChangePasswordSuccess.aspx" />
+    <Content Include="Views\Account\LogOn.aspx" />
+    <Content Include="Views\Account\Register.aspx" />
+    <Content Include="Views\Shared\Error.aspx" />
+    <Content Include="Views\Shared\LogOnUserControl.ascx" />
+    <Content Include="Views\Shared\RegisterToolbar.ascx" />
+    <Content Include="Views\Shared\SelectWardDropdowns.ascx" />
+    <Content Include="Views\Shared\Site.Master" />
+    <Content Include="Views\Stake\GetBishopric.aspx" />
+    <Content Include="Views\Stake\GetMember.aspx" />
+    <Content Include="Views\Stake\Index.aspx" />
+    <Content Include="Views\Stake\NotInStake.aspx" />
+    <Content Include="Views\Stake\SelectStake.aspx" />
+    <Content Include="Views\Stake\StakeExists.aspx" />
+    <Content Include="Views\Stake\StakeList.aspx" />
+    <Content Include="Views\Stake\StakeUserData.aspx" />
+    <Content Include="Views\Stake\StakeUsers.aspx" />
+    <Content Include="Scripts\jquery-1.4.4.js" />
+    <Content Include="Scripts\jquery-1.4.4-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.4.4.min.js" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\api\Views\Shared\" />
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\api\Views\Web.config" />
+    <None Include="Models\MSW.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>MSW.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\Calling\SpeakingAssignments.cshtml" />
+    <Content Include="Views\Print\WardInfo.cshtml" />
+    <Content Include="Views\Shared\_SiteLayout.cshtml" />
+    <Content Include="Views\Shared\_Menu.cshtml" />
+    <Content Include="Views\Shared\_SiteMenu.cshtml" />
+    <Content Include="Views\Shared\_StakeMenu.cshtml" />
+    <Content Include="Views\Organization\SelectOrganization.cshtml" />
+    <Content Include="Views\Organization\RequestOrganization.cshtml" />
+    <Content Include="Views\Organization\Index.cshtml" />
+    <Content Include="Views\Organization\Membership.cshtml" />
+    <Content Include="Views\Organization\ManageMembership.cshtml" />
+    <Content Include="Views\Organization\OrganizationPending.cshtml" />
+    <Content Include="Views\Group\SendNotification.cshtml" />
+    <Content Include="Views\Organization\ManageTeaching.cshtml" />
+    <Content Include="Views\Organization\District.cshtml" />
+    <Content Include="Views\Organization\Companionship.cshtml" />
+    <Content Include="Views\Organization\AddTeacherList.cshtml" />
+    <Content Include="Views\Organization\AddTeacheeList.cshtml" />
+    <Content Include="Views\Organization\OrgToTeachList.cshtml" />
+    <Content Include="Views\Organization\Teaching.cshtml" />
+    <Content Include="Views\Organization\TeachingStatus.cshtml" />
+    <Content Include="Views\Organization\Reports.cshtml" />
+    <Content Include="Views\Organization\Dashboard.cshtml" />
+    <Content Include="Views\Organization\CallingOverview.cshtml" />
+    <Content Include="Views\Organization\WithoutCallings.cshtml" />
+    <Content Include="Views\Organization\TeachingReport.cshtml" />
+    <Content Include="Views\Organization\TeachingReportByMember.cshtml" />
+    <Content Include="Views\Organization\ReportTeaching.cshtml" />
+    <Content Include="Views\Home\Profile.cshtml" />
+    <Content Include="Views\Stake\GetWard.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Models\MSW.dbml.layout">
+      <DependentUpon>MSW.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target> -->
+  <Target Name="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(ProjectDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>31699</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://192.168.1.131</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://192.168.1.131</IISAppRootUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
